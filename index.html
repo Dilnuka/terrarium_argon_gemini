@@ -108,7 +108,7 @@
             animation: fireflyFloat 5s ease-in-out infinite;
         }
         .sway-foliage {
-            animation: swaySlow 4.5s ease-in-out infinite;
+            animation: none;
             transform-origin: bottom center;
         }
         .waterfall-stream {
@@ -161,10 +161,7 @@
             <div>
                 <h1 class="font-display font-bold text-base lg:text-xl text-botanical-900 tracking-tight leading-none">Verdant Glass</h1>
                 <p class="text-[11px] text-botanical-600 hidden sm:block mt-0.5">Wabi-Kusa • Paludarium • Living Aquascape Studio</p>
-            </div>
-        </div>
-
-        <!-- Reference-Inspired Masterpiece Gallery Selector -->
+            <!-- Reference-Inspired Masterpiece Gallery Selector -->
         <div class="flex items-center gap-1.5 sm:gap-2.5">
             <div class="flex items-center bg-botanical-100/90 p-1 rounded-xl border border-botanical-200">
                 <span class="text-[11px] font-bold text-botanical-700 px-2 hidden xl:inline"><i class="ph-fill ph-sparkle text-amber-500 mr-1"></i>Scenes:</span>
@@ -175,6 +172,9 @@
                     <option value="rimless_cube">4. Rimless Mountain Pass Cube</option>
                     <option value="blossom_paludarium">5. Pink Blossom Village Paludarium</option>
                     <option value="neon_aquascape">6. Neon Tetra Nature Aquascape</option>
+                    <option value="wardian_conservatory">7. Victorian Wardian Conservatory</option>
+                    <option value="zen_torus_portal">8. Zen Torus Moon-Gate Portal</option>
+                    <option value="wabi_kusa_tray">9. Shallow Wabi-Kusa Waterfall Tray</option>
                 </select>
             </div>
 
@@ -248,6 +248,8 @@
 
             <!-- Background Lighting & Tabletop -->
             <div id="env-backdrop" class="absolute inset-0 pointer-events-none overflow-hidden transition-opacity duration-700">
+                <!-- Architectural Room Environment SVG Layer (Windows, Shoji Screens, Hanging Chains, Shelves) -->
+                <svg id="env-decor-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" class="absolute inset-0 w-full h-full opacity-80 transition-opacity duration-700"></svg>
                 <!-- Ambient Room Glow -->
                 <div id="sunbeams" class="absolute -top-20 left-1/2 -translate-x-1/2 w-[680px] h-[550px] bg-radial from-emerald-300/15 via-amber-100/5 to-transparent rounded-full blur-3xl transition-opacity duration-700"></div>
                 <!-- Realistic Tabletop Surface & Halo Spill -->
@@ -767,6 +769,260 @@
                     <rect x="75" y="126" width="22" height="10" rx="2" fill="#e5e7eb" />
                     <rect x="503" y="126" width="22" height="10" rx="2" fill="#e5e7eb" />
                     <path d="M 88 150 L 88 555" stroke="url(#glass-highlight-left)" stroke-width="12" stroke-linecap="round" />
+                `
+            },
+            wardian_hex: {
+                id: 'wardian_hex',
+                name: 'Victorian Wardian Faceted Terrarium',
+                desc: 'Multi-faceted geometric brass-and-glass conservatory house with a pitched cathedral roof.',
+                humidityRetention: 44,
+                baseY: 570,
+                topY: 115,
+                minX: 110,
+                maxX: 490,
+                lampType: 'pendant_brass',
+                clipPath: 'M 300 115 L 455 210 L 495 390 L 430 570 L 170 570 L 105 390 L 145 210 Z',
+                standSvg: `
+                    <ellipse cx="300" cy="585" rx="210" ry="20" fill="rgba(0,0,0,0.5)" />
+                    <polygon points="150,592 170,568 430,568 450,592" fill="#451a03" stroke="#b45309" stroke-width="2.5" />
+                    <rect x="145" y="590" width="310" height="12" rx="3" fill="#78350f" stroke="#d97706" stroke-width="1.5" />
+                `,
+                frontGlass: `
+                    <!-- Outer Faceted Brass Frame -->
+                    <polygon points="300,115 455,210 495,390 430,570 170,570 105,390 145,210" fill="none" stroke="#d97706" stroke-width="5" stroke-linejoin="round" />
+                    <!-- Internal Geometric Solder Seams -->
+                    <line x1="300" y1="115" x2="300" y2="235" stroke="#b45309" stroke-width="3.5" />
+                    <line x1="145" y1="210" x2="300" y2="235" stroke="#d97706" stroke-width="3" />
+                    <line x1="455" y1="210" x2="300" y2="235" stroke="#d97706" stroke-width="3" />
+                    <line x1="300" y1="235" x2="225" y2="415" stroke="#b45309" stroke-width="3" />
+                    <line x1="300" y1="235" x2="375" y2="415" stroke="#b45309" stroke-width="3" />
+                    <line x1="105" y1="390" x2="225" y2="415" stroke="#d97706" stroke-width="2.5" />
+                    <line x1="495" y1="390" x2="375" y2="415" stroke="#d97706" stroke-width="2.5" />
+                    <line x1="225" y1="415" x2="375" y2="415" stroke="#d97706" stroke-width="3" />
+                    <line x1="225" y1="415" x2="170" y2="570" stroke="#b45309" stroke-width="3" />
+                    <line x1="375" y1="415" x2="430" y2="570" stroke="#b45309" stroke-width="3" />
+                    <!-- Facet Glass Sheen -->
+                    <polygon points="300,122 152,212 296,232" fill="rgba(255,255,255,0.14)" />
+                    <polygon points="148,218 112,386 220,410 294,238" fill="url(#glass-highlight-left)" opacity="0.45" />
+                `
+            },
+            hanging_orb: {
+                id: 'hanging_orb',
+                name: 'Suspended Aerial Teardrop Orb',
+                desc: 'Floating blown-glass teardrop suspended from a wrought-iron stand with an upper viewing portal.',
+                humidityRetention: 32,
+                baseY: 545,
+                topY: 95,
+                minX: 125,
+                maxX: 475,
+                lampType: 'stand_hook',
+                clipPath: 'M 300 95 C 375 185, 485 305, 465 435 C 448 515, 385 550, 300 550 C 215 550, 152 515, 135 435 C 115 305, 225 185, 300 95 Z',
+                standSvg: `
+                    <!-- Wrought-Iron C-Curve Stand Base & Arch -->
+                    <ellipse cx="300" cy="595" rx="195" ry="18" fill="rgba(0,0,0,0.55)" />
+                    <ellipse cx="300" cy="590" rx="145" ry="12" fill="#18181b" stroke="#3f3f46" stroke-width="2.5" />
+                    <path d="M 165 590 C 55 480, 65 140, 265 52 L 300 52" fill="none" stroke="#27272a" stroke-width="8" stroke-linecap="round" />
+                    <path d="M 165 590 C 55 480, 65 140, 265 52" fill="none" stroke="#52525b" stroke-width="2" stroke-linecap="round" />
+                    <line x1="300" y1="52" x2="300" y2="95" stroke="#d97706" stroke-width="3" />
+                    <circle cx="300" cy="92" r="7" fill="none" stroke="#f59e0b" stroke-width="3" />
+                `,
+                frontGlass: `
+                    <path d="M 300 95 C 375 185, 485 305, 465 435 C 448 515, 385 550, 300 550 C 215 550, 152 515, 135 435 C 115 305, 225 185, 300 95 Z" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="3.5" />
+                    <!-- Front Circular Acoustic/Air Vent Rim -->
+                    <ellipse cx="300" cy="245" rx="68" ry="48" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" />
+                    <path d="M 175 265 C 138 355, 148 465, 225 525" fill="none" stroke="url(#glass-highlight-left)" stroke-width="13" stroke-linecap="round" />
+                `
+            },
+            zen_torus: {
+                id: 'zen_torus',
+                name: 'Zen Moon-Gate Torus Vessel',
+                desc: 'Sculptural circular ring aquarium with a hollow center window framed by an illuminated wood cradle.',
+                humidityRetention: 36,
+                baseY: 565,
+                topY: 135,
+                minX: 85,
+                maxX: 515,
+                lampType: 'ring',
+                clipPath: 'M 225 135 L 375 135 C 495 175, 545 315, 505 455 C 475 535, 395 568, 300 568 C 205 568, 125 535, 95 455 C 55 315, 105 175, 225 135 Z',
+                standSvg: `
+                    <ellipse cx="300" cy="590" rx="220" ry="20" fill="rgba(0,0,0,0.55)" />
+                    <!-- Carved Walnut Cradle -->
+                    <path d="M 125 535 Q 300 595 475 535 L 455 595 L 145 595 Z" fill="#451a03" stroke="#78350f" stroke-width="2.5" />
+                    <rect x="135" y="592" width="330" height="12" rx="4" fill="#290f02" />
+                `,
+                frontGlass: `
+                    <path d="M 225 135 L 375 135 C 495 175, 545 315, 505 455 C 475 535, 395 568, 300 568 C 205 568, 125 535, 95 455 C 55 315, 105 175, 225 135 Z" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="3.5" />
+                    <ellipse cx="300" cy="135" rx="75" ry="9" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" />
+                    <!-- Inner Torus Hollow Moon Window -->
+                    <circle cx="300" cy="325" r="56" fill="rgba(10, 15, 12, 0.72)" stroke="rgba(255,255,255,0.75)" stroke-width="4" />
+                    <circle cx="300" cy="325" r="52" fill="none" stroke="rgba(254, 240, 138, 0.45)" stroke-width="2" />
+                    <path d="M 118 235 C 88 335, 102 455, 178 528" fill="none" stroke="url(#glass-highlight-left)" stroke-width="14" stroke-linecap="round" />
+                `
+            },
+            cork_amphora: {
+                id: 'cork_amphora',
+                name: 'Sealed Corked Apothecary Amphora',
+                desc: 'Tall narrow-neck botanical carboy with a natural Portuguese cork stopper & embedded grow LED.',
+                humidityRetention: 48,
+                baseY: 575,
+                topY: 110,
+                minX: 120,
+                maxX: 480,
+                lampType: 'cork_led',
+                clipPath: 'M 245 110 L 355 110 L 355 175 C 455 215, 488 310, 478 465 C 470 545, 430 572, 375 575 L 225 575 C 170 572, 130 545, 122 465 C 112 310, 145 215, 245 175 Z',
+                standSvg: `
+                    <ellipse cx="300" cy="588" rx="195" ry="18" fill="rgba(0,0,0,0.55)" />
+                    <rect x="175" y="572" width="250" height="16" rx="6" fill="#27272a" stroke="#52525b" stroke-width="1.5" />
+                `,
+                frontGlass: `
+                    <!-- Natural Cork Stopper with Embedded Warm Grow LED -->
+                    <polygon points="248,88 352,88 344,132 256,132" fill="#b08968" stroke="#7f5539" stroke-width="2" />
+                    <ellipse cx="300" cy="88" rx="52" ry="7" fill="#ddb892" stroke="#7f5539" stroke-width="1.5" />
+                    <ellipse cx="300" cy="132" rx="34" ry="5" fill="#fef08a" />
+                    <!-- Carboy Neck & Body -->
+                    <path d="M 245 110 L 355 110 L 355 175 C 455 215, 488 310, 478 465 C 470 545, 430 572, 375 575 L 225 575 C 170 572, 130 545, 122 465 C 112 310, 145 215, 245 175 Z" fill="none" stroke="rgba(255,255,255,0.68)" stroke-width="3.5" />
+                    <ellipse cx="300" cy="110" rx="58" ry="7" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="3" />
+                    <path d="M 152 245 C 132 340, 136 465, 178 545" fill="none" stroke="url(#glass-highlight-left)" stroke-width="12" stroke-linecap="round" />
+                `
+            },
+            wabi_tray: {
+                id: 'wabi_tray',
+                name: 'Shallow Wabi-Kusa Ikebana Tray',
+                desc: 'Wide low-walled rimless glass pan allowing emergent bonsai trees and rocks to rise above the glass rim.',
+                humidityRetention: 18,
+                baseY: 565,
+                topY: 115,
+                minX: 55,
+                maxX: 545,
+                lampType: 'arch_bar',
+                clipPath: 'M 45 80 L 555 80 L 540 565 L 60 565 Z',
+                standSvg: `
+                    <ellipse cx="300" cy="586" rx="260" ry="18" fill="rgba(0,0,0,0.5)" />
+                    <!-- Japanese Kumiko Bamboo Tray Mat -->
+                    <polygon points="45,585 62,562 538,562 555,585" fill="#d4a373" stroke="#9c6644" stroke-width="2" />
+                    <rect x="45" y="585" width="510" height="12" rx="3" fill="#b07d4f" stroke="#7f4f24" stroke-width="1.5" />
+                `,
+                frontGlass: `
+                    <!-- Shallow Low-Iron Pan Walls (from Y=380 to 565) -->
+                    <line x1="60" y1="380" x2="82" y2="362" stroke="rgba(255,255,255,0.4)" stroke-width="2" />
+                    <line x1="540" y1="380" x2="518" y2="362" stroke="rgba(255,255,255,0.4)" stroke-width="2" />
+                    <line x1="82" y1="362" x2="518" y2="362" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" />
+                    <polygon points="56,380 544,380 538,565 62,565" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.8)" stroke-width="3.5" stroke-linejoin="round" />
+                    <path d="M 74 395 L 76 548" stroke="url(#glass-highlight-left)" stroke-width="10" stroke-linecap="round" />
+                `
+            }
+        };
+
+        const ENVIRONMENTS = {
+            darkroom: {
+                id: 'darkroom',
+                name: 'Halo Darkroom Gallery',
+                desc: 'Pitch-black exhibition gallery with high-contrast dramatic spotlight spill.',
+                isNightDefault: true,
+                stageBg: 'from-[#070a08] via-[#101612] to-[#060807]',
+                tableBg: 'from-[#1c221e] via-[#121614] to-[#090b0a]',
+                interiorOpacity: '0.68',
+                haloOpacity: '1',
+                decorSvg: `
+                    <circle cx="600" cy="360" r="360" fill="rgba(16, 185, 129, 0.04)" />
+                `
+            },
+            shoji_teahouse: {
+                id: 'shoji_teahouse',
+                name: 'Kyoto Shoji Tea Room',
+                desc: 'Warm timber lattice screens with a circular bamboo moon window and tatami mat surface.',
+                isNightDefault: false,
+                stageBg: 'from-[#f3e9dc] via-[#e6d5c3] to-[#d5bdaf]',
+                tableBg: 'from-[#c89f78] via-[#b0845d] to-[#8c6239]',
+                interiorOpacity: '0.22',
+                haloOpacity: '0.45',
+                decorSvg: `
+                    <!-- Left & Right Shoji Lattice Panels -->
+                    <g stroke="#b08968" stroke-width="3" opacity="0.45" fill="none">
+                        <rect x="40" y="30" width="240" height="620" fill="rgba(255,253,245,0.35)" />
+                        <line x1="120" y1="30" x2="120" y2="650" />
+                        <line x1="200" y1="30" x2="200" y2="650" />
+                        <line x1="40" y1="180" x2="280" y2="180" />
+                        <line x1="40" y1="330" x2="280" y2="330" />
+                        <line x1="40" y1="480" x2="280" y2="480" />
+
+                        <rect x="920" y="30" width="240" height="620" fill="rgba(255,253,245,0.35)" />
+                        <line x1="1000" y1="30" x2="1000" y2="650" />
+                        <line x1="1080" y1="30" x2="1080" y2="650" />
+                        <line x1="920" y1="180" x2="1160" y2="180" />
+                        <line x1="920" y1="330" x2="1160" y2="330" />
+                        <line x1="920" y1="480" x2="1160" y2="480" />
+                    </g>
+                    <!-- Silhouette Bamboo Branch -->
+                    <path d="M 960 520 Q 860 360 890 140" stroke="#7f5539" stroke-width="4" fill="none" opacity="0.3" />
+                    <ellipse cx="875" cy="240" rx="28" ry="7" transform="rotate(-25 875 240)" fill="#7f5539" opacity="0.25" />
+                    <ellipse cx="895" cy="195" rx="26" ry="6" transform="rotate(20 895 195)" fill="#7f5539" opacity="0.25" />
+                `
+            },
+            glass_conservatory: {
+                id: 'glass_conservatory',
+                name: 'Sunlit Botanical Greenhouse',
+                desc: 'Arched Victorian ironwork conservatory bathed in misty emerald daylight.',
+                isNightDefault: false,
+                stageBg: 'from-[#e2ece0] via-[#cfe0cc] to-[#b5ceb2]',
+                tableBg: 'from-[#5c6b5e] via-[#434f45] to-[#2e3830]',
+                interiorOpacity: '0.16',
+                haloOpacity: '0.3',
+                decorSvg: `
+                    <!-- Cathedral Glasshouse Archways -->
+                    <g stroke="rgba(71, 104, 64, 0.25)" stroke-width="4" fill="none">
+                        <path d="M 150 700 L 150 260 C 150 60, 450 60, 450 260 L 450 700" />
+                        <path d="M 450 700 L 450 220 C 450 20, 750 20, 750 220 L 750 700" />
+                        <path d="M 750 700 L 750 260 C 750 60, 1050 60, 1050 260 L 1050 700" />
+                        <line x1="100" y1="260" x2="1100" y2="260" />
+                        <line x1="100" y1="460" x2="1100" y2="460" />
+                    </g>
+                `
+            },
+            cyber_lounge: {
+                id: 'cyber_lounge',
+                name: 'Bioluminescent Neon Lounge',
+                desc: 'Midnight indigo aquascaping lounge with ambient cyan-magenta bioluminescent aura.',
+                isNightDefault: true,
+                stageBg: 'from-[#09071a] via-[#13112c] to-[#080711]',
+                tableBg: 'from-[#16152b] via-[#0e0d1d] to-[#06050d]',
+                interiorOpacity: '0.62',
+                haloOpacity: '0.95',
+                decorSvg: `
+                    <circle cx="380" cy="260" r="240" fill="rgba(6, 182, 212, 0.09)" filter="blur(40px)" />
+                    <circle cx="820" cy="340" r="240" fill="rgba(217, 70, 239, 0.08)" filter="blur(40px)" />
+                    <line x1="120" y1="120" x2="1080" y2="120" stroke="rgba(56, 189, 248, 0.2)" stroke-width="2" />
+                `
+            },
+            nordic_shelf: {
+                id: 'nordic_shelf',
+                name: 'Nordic Architect Studio Shelf',
+                desc: 'Clean warm alabaster plaster wall with minimalist oak shelving and soft daylight.',
+                isNightDefault: false,
+                stageBg: 'from-[#f8f9fa] via-[#e9ecef] to-[#dee2e6]',
+                tableBg: 'from-[#ddb892] via-[#c99e72] to-[#b08968]',
+                interiorOpacity: '0.15',
+                haloOpacity: '0.25',
+                decorSvg: `
+                    <!-- Floating Upper Studio Bookshelf -->
+                    <rect x="80" y="95" width="260" height="14" rx="4" fill="#d4a373" opacity="0.65" />
+                    <rect x="860" y="135" width="260" height="14" rx="4" fill="#d4a373" opacity="0.65" />
+                    <circle cx="940" cy="108" r="26" fill="#81a278" opacity="0.35" />
+                `
+            },
+            misty_dojo: {
+                id: 'misty_dojo',
+                name: 'Twilight Mountain Veranda',
+                desc: 'Deep slate mountain horizon at dusk withdistant misty pine ridges and warm lantern glow.',
+                isNightDefault: true,
+                stageBg: 'from-[#111827] via-[#1f2937] to-[#0f172a]',
+                tableBg: 'from-[#292524] via-[#1c1917] to-[#0c0a09]',
+                interiorOpacity: '0.52',
+                haloOpacity: '0.85',
+                decorSvg: `
+                    <!-- Distant Mountain Silhouettes -->
+                    <polygon points="0,680 220,380 480,560 780,340 1020,510 1200,390 1200,680" fill="rgba(15, 23, 42, 0.55)" />
+                    <circle cx="940" cy="180" r="48" fill="rgba(254, 240, 138, 0.14)" />
                 `
             }
         };
@@ -1306,16 +1562,20 @@
 
                     <!-- Sculpted Mossy Mountain Relief Selector -->
                     <div class="p-3 rounded-2xl bg-botanical-50 border border-botanical-200 space-y-2">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-botanical-700 block">Mossy Canyon Relief Style</span>
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-botanical-700 block">Mossy Canyon & Cliff Relief Shape</span>
                         <div class="grid grid-cols-3 gap-1.5">
                             ${[
                                 ['canyon', 'Twin Canyon'],
+                                ['arch_bridge', 'Natural Arch'],
+                                ['stepped_terraces', 'Zen Terraces'],
+                                ['floating_spire', 'Avatar Spire'],
+                                ['crater_caldera', 'Volcanic Basin'],
                                 ['left_cliff', 'Left Cliff'],
                                 ['right_peak', 'Right Peak'],
                                 ['island', 'Center Island'],
                                 ['flat', 'Flat Floor']
                             ].map(([id, label]) => `
-                                <button onclick="setTerrainStyle('${id}')" class="py-1.5 px-2 rounded-xl text-xs font-semibold border transition ${state.terrainStyle === id ? 'bg-botanical-700 text-white border-botanical-700 shadow-sm' : 'bg-white text-botanical-700 border-botanical-200 hover:bg-botanical-100'}">${label}</button>
+                                <button onclick="setTerrainStyle('${id}')" class="py-1.5 px-1.5 rounded-xl text-[11px] font-semibold border transition ${state.terrainStyle === id ? 'bg-botanical-700 text-white border-botanical-700 shadow-sm' : 'bg-white text-botanical-700 border-botanical-200 hover:bg-botanical-100'}">${label}</button>
                             `).join('')}
                         </div>
                     </div>
@@ -1449,11 +1709,32 @@
             } else if (state.activeTab === 'ambiance') {
                 container.innerHTML = `
                     <div>
-                        <h2 class="font-display font-bold text-base text-botanical-900">Spotlight & Studio Mood</h2>
-                        <p class="text-xs text-botanical-600 mt-0.5">Control the overhead Halo LED cone, darkroom contrast, and fairy lights.</p>
+                        <h2 class="font-display font-bold text-base text-botanical-900">Environment Space & Studio Lighting</h2>
+                        <p class="text-xs text-botanical-600 mt-0.5">Transform the surrounding room architecture, overhead lamp beam, and atmospheric glow.</p>
                     </div>
 
-                    <div class="space-y-3">
+                    <!-- Architectural Room Space Picker -->
+                    <div class="space-y-2">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-botanical-700 block">Surrounding Environment Space</span>
+                        <div class="grid grid-cols-1 gap-2">
+                            ${Object.values(ENVIRONMENTS).map(env => {
+                                const active = state.ambient.environment === env.id;
+                                return `
+                                    <button onclick="selectEnvironment('${env.id}')" class="w-full text-left p-2.5 rounded-2xl border transition flex items-center justify-between gap-2 ${active ? 'bg-botanical-50 border-botanical-600 ring-2 ring-botanical-500/20 shadow-sm' : 'bg-white hover:bg-botanical-50/60 border-botanical-200'}">
+                                        <div>
+                                            <div class="font-bold text-xs text-botanical-900">${env.name}</div>
+                                            <div class="text-[11px] text-botanical-600 mt-0.5">${env.desc}</div>
+                                        </div>
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${env.isNightDefault ? 'bg-indigo-950 text-amber-300' : 'bg-amber-100 text-amber-900'}">
+                                            ${env.isNightDefault ? 'Dark' : 'Light'}
+                                        </span>
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-1">
                         <div class="p-3.5 rounded-2xl bg-white border border-botanical-200 space-y-2 shadow-sm">
                             <div class="flex justify-between text-xs font-bold text-botanical-800">
                                 <span><i class="ph-fill ph-lightbulb-filament text-amber-500 mr-1"></i> Overhead Lamp Beam Intensity</span>
@@ -1466,7 +1747,7 @@
                             <label class="flex items-center justify-between cursor-pointer">
                                 <span class="text-xs font-bold text-botanical-800 flex items-center gap-2">
                                     <i class="ph-fill ph-moon-stars text-indigo-600 text-base"></i>
-                                    <span>Dramatic Darkroom Halo Mode (Photo 1)</span>
+                                    <span>Dramatic Darkroom Halo Mode</span>
                                 </span>
                                 <input type="checkbox" ${state.ambient.isNight ? 'checked' : ''} onchange="toggleNightMode()" class="w-4 h-4 accent-botanical-600 rounded" />
                             </label>
@@ -1548,6 +1829,35 @@
                     <rect x="${x0 + 12}" y="55" width="${w - 24}" height="4" rx="2" fill="#fefce8" />
                 `;
                 cone.setAttribute('points', `${x0 + 15},58 ${x0 + w - 15},58 540,${vessel.baseY} 60,${vessel.baseY}`);
+            } else if (vessel.lampType === 'pendant_brass') {
+                // Vintage brass chain & cone lamp for Victorian Wardian Hex
+                lampLayer.innerHTML = `
+                    <line x1="300" y1="15" x2="300" y2="62" stroke="#b45309" stroke-width="4" stroke-dasharray="6 3" />
+                    <polygon points="265,82 288,58 312,58 335,82" fill="#d97706" stroke="#78350f" stroke-width="2" />
+                    <ellipse cx="300" cy="83" rx="28" ry="5" fill="#fef08a" />
+                    <ellipse cx="300" cy="85" rx="42" ry="11" fill="url(#fairy-glow)" />
+                `;
+                cone.setAttribute('points', `268,83 332,83 510,${vessel.baseY} 90,${vessel.baseY}`);
+            } else if (vessel.lampType === 'stand_hook') {
+                // Integrated mini spotlight under the hanging orb hook
+                lampLayer.innerHTML = `
+                    <ellipse cx="300" cy="98" rx="24" ry="8" fill="url(#fairy-glow)" />
+                `;
+                cone.setAttribute('points', `280,96 320,96 485,${vessel.baseY} 115,${vessel.baseY}`);
+            } else if (vessel.lampType === 'cork_led') {
+                // Embedded warm LED disk under the Portuguese cork stopper
+                lampLayer.innerHTML = `
+                    <ellipse cx="300" cy="134" rx="38" ry="10" fill="url(#fairy-glow)" />
+                `;
+                cone.setAttribute('points', `265,132 335,132 490,${vessel.baseY} 110,${vessel.baseY}`);
+            } else if (vessel.lampType === 'arch_bar') {
+                // Minimalist stainless arch bar over the shallow Wabi-Kusa tray
+                lampLayer.innerHTML = `
+                    <path d="M 95 380 L 95 75 Q 95 55 115 55 L 485 55 Q 505 55 505 75 L 505 380" fill="none" stroke="#9ca3af" stroke-width="4" />
+                    <rect x="170" y="50" width="260" height="10" rx="4" fill="#18181b" stroke="#d1d5db" stroke-width="1.5" />
+                    <rect x="185" y="60" width="230" height="4" rx="2" fill="#fefce8" />
+                `;
+                cone.setAttribute('points', `185,62 415,62 550,${vessel.baseY} 50,${vessel.baseY}`);
             } else {
                 lampLayer.innerHTML = '';
                 cone.setAttribute('points', `220,100 380,100 520,${vessel.baseY} 80,${vessel.baseY}`);
@@ -1568,6 +1878,50 @@
                     <path d="M 530 ${topSubY + 20} L 530 ${topSubY - 205} Q 435 ${topSubY - 185}, 390 ${topSubY - 105} Q 350 ${topSubY - 25}, 320 ${topSubY + 12} Z" fill="#14532d" />
                     <path d="M 515 ${topSubY + 15} C 495 ${topSubY - 155}, 425 ${topSubY - 160}, 375 ${topSubY - 75} L 330 ${topSubY + 15} Z" fill="#4d7c0f" />
                     <path d="M 490 ${topSubY} C 460 ${topSubY - 115}, 410 ${topSubY - 110}, 355 ${topSubY - 15} Z" fill="#84cc16" opacity="0.65" />
+                `;
+            } else if (state.terrainStyle === 'arch_bridge') {
+                // Spanning Natural Stone & Moss Archway with hollow pass-through
+                reliefLayer.innerHTML = `
+                    <path d="M 80 ${topSubY + 20} C 95 ${topSubY - 210}, 215 ${topSubY - 245}, 300 ${topSubY - 235} C 385 ${topSubY - 245}, 505 ${topSubY - 210}, 520 ${topSubY + 20} L 415 ${topSubY + 20} C 405 ${topSubY - 115}, 360 ${topSubY - 155}, 300 ${topSubY - 155} C 240 ${topSubY - 155}, 195 ${topSubY - 115}, 185 ${topSubY + 20} Z" fill="#334155" stroke="#1e293b" stroke-width="2" />
+                    <!-- Emerald Moss Blanket on top of the Stone Arch -->
+                    <path d="M 110 ${topSubY - 95} C 155 ${topSubY - 225}, 235 ${topSubY - 250}, 300 ${topSubY - 242} C 365 ${topSubY - 250}, 445 ${topSubY - 225}, 490 ${topSubY - 95} C 435 ${topSubY - 185}, 365 ${topSubY - 205}, 300 ${topSubY - 205} C 235 ${topSubY - 205}, 165 ${topSubY - 185}, 110 ${topSubY - 95} Z" fill="#4d7c0f" />
+                    <ellipse cx="300" cy="${topSubY - 228}" rx="85" ry="14" fill="#84cc16" opacity="0.7" />
+                `;
+            } else if (state.terrainStyle === 'stepped_terraces') {
+                // Multi-level Zen Rice-Paddy / Slate Terraces
+                reliefLayer.innerHTML = `
+                    <!-- Upper Back Terrace -->
+                    <path d="M 95 ${topSubY + 15} L 95 ${topSubY - 175} L 365 ${topSubY - 175} Q 405 ${topSubY - 175} 420 ${topSubY - 115} L 445 ${topSubY + 15} Z" fill="#1e293b" />
+                    <ellipse cx="235" cy="${topSubY - 175}" rx="135" ry="14" fill="#4d7c0f" />
+                    <!-- Mid Terrace -->
+                    <path d="M 135 ${topSubY + 15} L 135 ${topSubY - 110} L 445 ${topSubY - 110} Q 475 ${topSubY - 110} 490 ${topSubY - 55} L 505 ${topSubY + 15} Z" fill="#334155" />
+                    <ellipse cx="290" cy="${topSubY - 110}" rx="155" ry="14" fill="#65a30d" />
+                    <!-- Lower Foreground Terrace -->
+                    <path d="M 175 ${topSubY + 15} L 175 ${topSubY - 52} L 485 ${topSubY - 52} L 515 ${topSubY + 15} Z" fill="#475569" />
+                    <ellipse cx="330" cy="${topSubY - 52}" rx="155" ry="12" fill="#84cc16" />
+                `;
+            } else if (state.terrainStyle === 'floating_spire') {
+                // Avatar Hallelujah Floating Mountain Pillar + Base Crags
+                reliefLayer.innerHTML = `
+                    <!-- Floating Mossy Monolith Island -->
+                    <g transform="translate(300, ${topSubY - 185})">
+                        <polygon points="-68,-35 68,-35 52,25 18,88 -12,95 -48,32" fill="#334155" stroke="#1e293b" stroke-width="2" />
+                        <polygon points="-12,95 18,88 6,40 -22,20" fill="#64748b" opacity="0.55" />
+                        <path d="M -74,-32 C -65,-68 65,-68 74,-32 C 45,-20 -45,-20 -74,-32 Z" fill="#4d7c0f" />
+                        <ellipse cx="0" cy="-42" rx="52" ry="12" fill="#84cc16" opacity="0.85" />
+                        <!-- Hanging Vines -->
+                        <path d="M -42,-25 Q -46,18 -40,45 M 28,-22 Q 34,25 28,58 M -8,-18 Q -4,35 0,72" stroke="#65a30d" stroke-width="2" fill="none" opacity="0.8" />
+                    </g>
+                    <!-- Lower Flanking Base Crags -->
+                    <polygon points="105,${topSubY + 15} 145,${topSubY - 75} 225,${topSubY + 15}" fill="#1b4332" />
+                    <polygon points="375,${topSubY + 15} 455,${topSubY - 82} 505,${topSubY + 15}" fill="#14532d" />
+                `;
+            } else if (state.terrainStyle === 'crater_caldera') {
+                // Volcanic Amphitheater Caldera Bowl
+                reliefLayer.innerHTML = `
+                    <path d="M 65 ${topSubY + 20} L 95 ${topSubY - 185} L 185 ${topSubY - 145} Q 300 ${topSubY - 25} 415 ${topSubY - 145} L 505 ${topSubY - 185} L 535 ${topSubY + 20} Z" fill="#292524" stroke="#1c1917" stroke-width="2" />
+                    <path d="M 95 ${topSubY - 185} L 185 ${topSubY - 145} L 165 ${topSubY - 45} L 85 ${topSubY - 65} Z" fill="#4d7c0f" opacity="0.85" />
+                    <path d="M 505 ${topSubY - 185} L 415 ${topSubY - 145} L 435 ${topSubY - 45} L 515 ${topSubY - 65} Z" fill="#65a30d" opacity="0.85" />
                 `;
             } else if (state.terrainStyle === 'left_cliff') {
                 reliefLayer.innerHTML = `
@@ -2475,23 +2829,46 @@
             else biomeEl.textContent = 'Wabi-Kusa Canyon';
         }
 
+        function selectEnvironment(envId) {
+            const env = ENVIRONMENTS[envId];
+            if (!env) return;
+            state.ambient.environment = envId;
+            state.ambient.isNight = env.isNightDefault;
+            SoundFX.playPop(430);
+            applyEnvironmentTheme();
+            if (state.activeTab === 'ambiance') renderSidebar();
+        }
+
         function applyEnvironmentTheme() {
             const stage = document.getElementById('stage-container');
+            const table = document.getElementById('table-surface');
+            const decorSvg = document.getElementById('env-decor-svg');
             const icon = document.getElementById('icon-daynight');
             const label = document.getElementById('label-daynight');
             const btnNight = document.getElementById('btn-night');
             const interiorTint = document.getElementById('interior-backdrop-tint');
             const haloPool = document.getElementById('table-halo-pool');
 
+            const env = ENVIRONMENTS[state.ambient.environment] || ENVIRONMENTS.darkroom;
+            if (decorSvg) {
+                decorSvg.innerHTML = env.decorSvg || '';
+            }
+
             if (state.ambient.isNight) {
-                stage.className = 'flex-1 relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 order-1 lg:order-2 h-[60vh] lg:h-full bg-gradient-to-b from-[#080b09] via-[#101612] to-[#070908]';
+                const bgClass = (env.isNightDefault ? env.stageBg : 'from-[#080b09] via-[#101612] to-[#070908]');
+                const tblClass = (env.isNightDefault ? env.tableBg : 'from-[#1f2421] via-[#141815] to-[#0b0d0c]');
+                stage.className = `flex-1 relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 order-1 lg:order-2 h-[60vh] lg:h-full bg-gradient-to-b ${bgClass}`;
+                if (table) table.className = `absolute bottom-0 inset-x-0 h-16 sm:h-24 bg-gradient-to-b ${tblClass} border-t border-white/10 shadow-inner transition-colors duration-700`;
                 icon.className = 'ph-fill ph-lightbulb-filament text-base text-amber-300';
                 label.textContent = 'Halo Darkroom';
                 btnNight.className = 'flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-indigo-950 hover:bg-indigo-900 text-indigo-100 border border-indigo-700 text-xs font-semibold transition active:scale-95 shadow-sm';
-                if (interiorTint) interiorTint.setAttribute('opacity', '0.68');
-                if (haloPool) haloPool.style.opacity = '1';
+                if (interiorTint) interiorTint.setAttribute('opacity', env.interiorOpacity || '0.68');
+                if (haloPool) haloPool.style.opacity = env.haloOpacity || '1';
             } else {
-                stage.className = 'flex-1 relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 order-1 lg:order-2 h-[60vh] lg:h-full bg-gradient-to-b from-[#e6ede4] via-[#d8e4d4] to-[#c3d5be]';
+                const bgClass = (!env.isNightDefault ? env.stageBg : 'from-[#e6ede4] via-[#d8e4d4] to-[#c3d5be]');
+                const tblClass = (!env.isNightDefault ? env.tableBg : 'from-[#d4a373] via-[#b0845d] to-[#8c6239]');
+                stage.className = `flex-1 relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 order-1 lg:order-2 h-[60vh] lg:h-full bg-gradient-to-b ${bgClass}`;
+                if (table) table.className = `absolute bottom-0 inset-x-0 h-16 sm:h-24 bg-gradient-to-b ${tblClass} border-t border-black/10 shadow-inner transition-colors duration-700`;
                 icon.className = 'ph-fill ph-sun text-base text-amber-500';
                 label.textContent = 'Bright Studio';
                 btnNight.className = 'flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-semibold transition active:scale-95 shadow-sm';
@@ -2516,6 +2893,7 @@
                 state.vesselId = 'halo_jar';
                 state.terrainStyle = 'canyon';
                 state.waterLevel = 0;
+                state.ambient.environment = 'darkroom';
                 state.ambient.isNight = true;
                 state.ambient.lightIntensity = 94;
                 state.ambient.fairyLights = false;
@@ -2545,6 +2923,7 @@
                 state.vesselId = 'teardrop_cloche';
                 state.terrainStyle = 'island';
                 state.waterLevel = 0;
+                state.ambient.environment = 'shoji_teahouse';
                 state.ambient.isNight = false;
                 state.ambient.lightIntensity = 86;
                 state.ambient.fairyLights = false;
@@ -2571,6 +2950,7 @@
                 state.terrainStyle = 'island';
                 state.waterLevel = 26;
                 state.waterTint = 'turquoise';
+                state.ambient.environment = 'nordic_shelf';
                 state.ambient.isNight = false;
                 state.ambient.lightIntensity = 82;
                 state.ambient.fairyLights = false;
@@ -2597,6 +2977,7 @@
                 state.vesselId = 'rimless_cube';
                 state.terrainStyle = 'canyon';
                 state.waterLevel = 0;
+                state.ambient.environment = 'nordic_shelf';
                 state.ambient.isNight = false;
                 state.ambient.lightIntensity = 88;
                 state.ambient.fairyLights = false;
@@ -2622,6 +3003,7 @@
                 state.terrainStyle = 'left_cliff';
                 state.waterLevel = 32;
                 state.waterTint = 'emerald';
+                state.ambient.environment = 'cyber_lounge';
                 state.ambient.isNight = true;
                 state.ambient.lightIntensity = 90;
                 state.ambient.fairyLights = false;
@@ -2649,6 +3031,7 @@
                 state.terrainStyle = 'canyon';
                 state.waterLevel = 56;
                 state.waterTint = 'emerald';
+                state.ambient.environment = 'glass_conservatory';
                 state.ambient.isNight = false;
                 state.ambient.lightIntensity = 95;
                 state.ambient.fairyLights = false;
@@ -2668,6 +3051,82 @@
                 ];
                 addFaunaGroup('tetra', 16);
                 addFaunaGroup('shrimp', 5);
+            } else if (presetName === 'wardian_conservatory') {
+                // Scene 7: Victorian Brass Faceted Wardian Case with Natural Arch & Sunlit Greenhouse
+                state.vesselId = 'wardian_hex';
+                state.terrainStyle = 'arch_bridge';
+                state.waterLevel = 0;
+                state.ambient.environment = 'glass_conservatory';
+                state.ambient.isNight = false;
+                state.ambient.lightIntensity = 88;
+                state.ambient.fairyLights = true;
+                state.ambient.fireflies = true;
+                state.substrates = [
+                    { id: 's1', type: 'pebbles', thickness: 24, color: '#78716c', wave: 4 },
+                    { id: 's2', type: 'charcoal', thickness: 18, color: '#1c1917', wave: 4 },
+                    { id: 's3', type: 'soil', thickness: 32, color: '#3b281e', wave: 6 },
+                    { id: 's4', type: 'moss', thickness: 26, color: '#4d7c0f', wave: 12 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'bonsai_canopy', x: 300, y: topY - 190, scale: 1.15, rotation: 0, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'fern', x: 205, y: topY - 12, scale: 1.15, rotation: -12, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'fittonia', x: 385, y: topY - 6, scale: 1.1, rotation: 8, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'tea_cottage', x: 300, y: topY - 8, scale: 0.98, rotation: 0, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('butterfly', 3);
+                addFaunaGroup('frog', 2);
+            } else if (presetName === 'zen_torus_portal') {
+                // Scene 8: Zen Moon-Gate Torus Vessel in Kyoto Shoji Room
+                state.vesselId = 'zen_torus';
+                state.terrainStyle = 'stepped_terraces';
+                state.waterLevel = 28;
+                state.waterTint = 'turquoise';
+                state.ambient.environment = 'shoji_teahouse';
+                state.ambient.isNight = false;
+                state.ambient.lightIntensity = 90;
+                state.ambient.fairyLights = false;
+                state.ambient.fireflies = true;
+                state.substrates = [
+                    { id: 's1', type: 'sand', thickness: 28, color: '#f5ebe0', wave: 5 },
+                    { id: 's2', type: 'moss', thickness: 26, color: '#65a30d', wave: 10 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'cherry_blossom', x: 185, y: topY - 95, scale: 1.15, rotation: 10, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'pagoda', x: 415, y: topY - 92, scale: 1.05, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'wanderer', x: 225, y: topY - 38, scale: 0.95, rotation: 0, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('koi', 4);
+                addFaunaGroup('shrimp', 3);
+                addFaunaGroup('butterfly', 2);
+            } else if (presetName === 'wabi_kusa_tray') {
+                // Scene 9: Shallow Rimless Wabi-Kusa Ikebana Tray with Emergent Bonsai & Floating Spire
+                state.vesselId = 'wabi_tray';
+                state.terrainStyle = 'floating_spire';
+                state.waterLevel = 22;
+                state.waterTint = 'turquoise';
+                state.ambient.environment = 'misty_dojo';
+                state.ambient.isNight = true;
+                state.ambient.lightIntensity = 92;
+                state.ambient.fairyLights = false;
+                state.ambient.fireflies = true;
+                state.substrates = [
+                    { id: 's1', type: 'sand', thickness: 24, color: '#e6ccb2', wave: 4 },
+                    { id: 's2', type: 'moss', thickness: 24, color: '#4d7c0f', wave: 12 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'bonsai_canopy', x: 300, y: topY - 210, scale: 1.35, rotation: 0, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'waterfall_chute', x: 300, y: topY - 12, scale: 1.2, rotation: 0, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 175, y: topY - 8, scale: 1.25, rotation: -10, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 425, y: topY - 8, scale: 1.25, rotation: 10, flipped: true, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'red_crypto', x: 220, y: topY + 6, scale: 1.15, rotation: 0, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('koi', 3);
+                addFaunaGroup('tetra', 6);
+                addFaunaGroup('frog', 2);
+                addFaunaGroup('butterfly', 2);
             }
 
             SoundFX.playChime();
