@@ -1,0 +1,2751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdant Glass — Wabi-Kusa, Paludarium & Aquascape Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Fraunces', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        botanical: {
+                            50: '#f5f7f4',
+                            100: '#e6ece3',
+                            200: '#cddbc8',
+                            300: '#abc2a4',
+                            400: '#81a278',
+                            500: '#5d8454',
+                            600: '#476840',
+                            700: '#395334',
+                            800: '#2f432b',
+                            900: '#273824',
+                        },
+                        clay: {
+                            100: '#f9ebe4',
+                            300: '#e6b8a2',
+                            500: '#c97b58',
+                            600: '#b3623e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(129, 162, 120, 0.35);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(129, 162, 120, 0.6);
+        }
+
+        /* Animations */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.55; transform: scale(0.96); }
+            50% { opacity: 1; transform: scale(1.08); }
+        }
+        @keyframes mistFall {
+            0% { transform: translateY(-20px) translateX(0px); opacity: 0; }
+            25% { opacity: 0.75; }
+            85% { opacity: 0.55; }
+            100% { transform: translateY(340px) translateX(12px); opacity: 0; }
+        }
+        @keyframes fireflyFloat {
+            0% { transform: translate(0px, 0px); opacity: 0.2; }
+            33% { transform: translate(18px, -22px); opacity: 0.95; }
+            66% { transform: translate(-14px, -38px); opacity: 0.6; }
+            100% { transform: translate(4px, -6px); opacity: 0.2; }
+        }
+        @keyframes swaySlow {
+            0%, 100% { transform: rotate(-2.5deg); }
+            50% { transform: rotate(2.5deg); }
+        }
+        @keyframes waterfallFlow {
+            0% { stroke-dashoffset: 40; }
+            100% { stroke-dashoffset: 0; }
+        }
+        @keyframes waterRipple {
+            0%, 100% { transform: translateX(-6px); opacity: 0.45; }
+            50% { transform: translateX(6px); opacity: 0.85; }
+        }
+
+        .fairy-bulb {
+            animation: pulseGlow 2.8s ease-in-out infinite;
+        }
+        .mist-particle {
+            animation: mistFall 1.8s linear forwards;
+        }
+        .firefly-particle {
+            animation: fireflyFloat 5s ease-in-out infinite;
+        }
+        .sway-foliage {
+            animation: swaySlow 4.5s ease-in-out infinite;
+            transform-origin: bottom center;
+        }
+        .waterfall-stream {
+            stroke-dasharray: 10 8;
+            animation: waterfallFlow 0.75s linear infinite;
+        }
+        .water-surface-shimmer {
+            animation: waterRipple 3.6s ease-in-out infinite;
+        }
+        .item-hover-outline:hover {
+            filter: drop-shadow(0px 0px 6px rgba(93, 132, 84, 0.55));
+        }
+        .item-selected-outline {
+            filter: drop-shadow(0px 0px 9px rgba(245, 158, 11, 0.9));
+        }
+
+        /* Range input styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(93, 132, 84, 0.22);
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #476840;
+            margin-top: -5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.18);
+        }
+    </style>
+</head>
+<body class="bg-botanical-50 text-botanical-900 h-screen w-screen flex flex-col select-none">
+
+    <header class="h-16 px-3 lg:px-6 bg-white/90 backdrop-blur-md border-b border-botanical-200/80 flex items-center justify-between z-30 shrink-0 shadow-sm">
+        <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-botanical-600 to-botanical-800 flex items-center justify-center text-white shadow-sm">
+                <i class="ph-fill ph-potted-plant text-xl"></i>
+            </div>
+            <div>
+                <h1 class="font-display font-bold text-base lg:text-xl text-botanical-900 tracking-tight leading-none">Verdant Glass</h1>
+                <p class="text-[11px] text-botanical-600 hidden sm:block mt-0.5">Wabi-Kusa • Paludarium • Living Aquascape Studio</p>
+            </div>
+        </div>
+
+        <!-- Reference-Inspired Masterpiece Gallery Selector -->
+        <div class="flex items-center gap-1.5 sm:gap-2.5">
+            <div class="flex items-center bg-botanical-100/90 p-1 rounded-xl border border-botanical-200">
+                <span class="text-[11px] font-bold text-botanical-700 px-2 hidden xl:inline"><i class="ph-fill ph-sparkle text-amber-500 mr-1"></i>Scenes:</span>
+                <select id="preset-select" onchange="loadPreset(this.value)" class="bg-white text-botanical-900 text-xs font-bold px-2.5 py-1.5 rounded-lg border border-botanical-200/80 shadow-sm focus:outline-none cursor-pointer">
+                    <option value="canyon_bridge">1. Canyon Rope Bridge & Halo Lamp</option>
+                    <option value="samurai_pagoda">2. Samurai Staircase & Bonsai Cloche</option>
+                    <option value="turquoise_lagoon">3. Turquoise Lagoon & Red Wanderer</option>
+                    <option value="rimless_cube">4. Rimless Mountain Pass Cube</option>
+                    <option value="blossom_paludarium">5. Pink Blossom Village Paludarium</option>
+                    <option value="neon_aquascape">6. Neon Tetra Nature Aquascape</option>
+                </select>
+            </div>
+
+            <button onclick="feedFauna()" class="flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-semibold transition active:scale-95 shadow-sm" title="Drop Food Pellets for Fish & Shrimp">
+                <i class="ph-fill ph-fish-simple text-base text-amber-600"></i>
+                <span class="hidden md:inline">Feed Fauna</span>
+            </button>
+
+            <button onclick="triggerWatering()" id="btn-water" class="flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 text-xs font-semibold transition active:scale-95 shadow-sm" title="Mist Terrarium">
+                <i class="ph-fill ph-drop text-base text-sky-500"></i>
+                <span class="hidden md:inline">Mist</span>
+            </button>
+
+            <button onclick="toggleNightMode()" id="btn-night" class="flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-indigo-950 hover:bg-indigo-900 text-indigo-100 border border-indigo-700 text-xs font-semibold transition active:scale-95 shadow-sm" title="Toggle Studio Spotlight / Daylight">
+                <i id="icon-daynight" class="ph-fill ph-lightbulb-filament text-base text-amber-300"></i>
+                <span id="label-daynight" class="hidden sm:inline">Halo Darkroom</span>
+            </button>
+
+            <button onclick="toggleSound()" id="btn-sound" class="p-2 rounded-xl bg-botanical-100 hover:bg-botanical-200 text-botanical-700 border border-botanical-200 transition" title="Toggle Ambient Sound">
+                <i id="icon-sound" class="ph-fill ph-speaker-high text-base"></i>
+            </button>
+
+            <button onclick="exportSnapshot()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-botanical-600 hover:bg-botanical-700 text-white text-xs font-semibold transition active:scale-95 shadow-sm">
+                <i class="ph-bold ph-camera text-base"></i>
+                <span class="hidden sm:inline">Snapshot</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+
+        <!-- LEFT SIDEBAR: Builder Tools & Catalog -->
+        <aside class="w-full lg:w-80 xl:w-96 bg-white/95 backdrop-blur-md border-b lg:border-b-0 lg:border-r border-botanical-200 flex flex-col z-20 shrink-0 h-[40vh] lg:h-full order-2 lg:order-1">
+            <!-- Navigation Tabs (6 Tabs including Live Fauna) -->
+            <div class="grid grid-cols-6 gap-1 p-1.5 bg-botanical-50/90 border-b border-botanical-200 shrink-0">
+                <button onclick="switchTab('vessels')" id="tab-vessels" class="tab-btn flex flex-col items-center py-2 px-0.5 rounded-xl text-[11px] font-semibold transition bg-white text-botanical-800 shadow-sm border border-botanical-200/80">
+                    <i class="ph-duotone ph-jar text-base mb-0.5 text-botanical-600"></i>
+                    <span>Vessel</span>
+                </button>
+                <button onclick="switchTab('substrate')" id="tab-substrate" class="tab-btn flex flex-col items-center py-2 px-0.5 rounded-xl text-[11px] font-semibold transition text-botanical-600 hover:bg-white/60">
+                    <i class="ph-duotone ph-waves text-base mb-0.5"></i>
+                    <span>Terrain</span>
+                </button>
+                <button onclick="switchTab('plants')" id="tab-plants" class="tab-btn flex flex-col items-center py-2 px-0.5 rounded-xl text-[11px] font-semibold transition text-botanical-600 hover:bg-white/60">
+                    <i class="ph-duotone ph-tree text-base mb-0.5"></i>
+                    <span>Flora</span>
+                </button>
+                <button onclick="switchTab('decor')" id="tab-decor" class="tab-btn flex flex-col items-center py-2 px-0.5 rounded-xl text-[11px] font-semibold transition text-botanical-600 hover:bg-white/60">
+                    <i class="ph-duotone ph-mountains text-base mb-0.5"></i>
+                    <span>Zen</span>
+                </button>
+                <button onclick="switchTab('fauna')" id="tab-fauna" class="tab-btn flex flex-col items-center py-2 px-0.5 rounded-xl text-[11px] font-semibold transition text-botanical-600 hover:bg-white/60 relative">
+                    <span class="absolute top-1 right-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    <i class="ph-duotone ph-fish text-base mb-0.5 text-emerald-600"></i>
+                    <span>Fauna</span>
+                </button>
+                <button onclick="switchTab('ambiance')" id="tab-ambiance" class="tab-btn flex flex-col items-center py-2 px-0.5 rounded-xl text-[11px] font-semibold transition text-botanical-600 hover:bg-white/60">
+                    <i class="ph-duotone ph-lamp-pendant text-base mb-0.5"></i>
+                    <span>Lamp</span>
+                </button>
+            </div>
+
+            <!-- Tab Content Container -->
+            <div class="flex-1 overflow-y-auto p-3.5 space-y-3.5" id="sidebar-content">
+                <!-- Populated dynamically by JS -->
+            </div>
+        </aside>
+
+        <!-- CENTER STAGE: Interactive SVG Terrarium & Autonomous Fauna Canvas -->
+        <section id="stage-container" class="flex-1 relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 order-1 lg:order-2 h-[60vh] lg:h-full bg-gradient-to-b from-[#0c0f0d] via-[#141916] to-[#0a0d0b]">
+
+            <!-- Background Lighting & Tabletop -->
+            <div id="env-backdrop" class="absolute inset-0 pointer-events-none overflow-hidden transition-opacity duration-700">
+                <!-- Ambient Room Glow -->
+                <div id="sunbeams" class="absolute -top-20 left-1/2 -translate-x-1/2 w-[680px] h-[550px] bg-radial from-emerald-300/15 via-amber-100/5 to-transparent rounded-full blur-3xl transition-opacity duration-700"></div>
+                <!-- Realistic Tabletop Surface & Halo Spill -->
+                <div id="table-surface" class="absolute bottom-0 inset-x-0 h-16 sm:h-24 bg-gradient-to-b from-[#1f2421] via-[#141815] to-[#0b0d0c] border-t border-white/10 shadow-inner transition-colors duration-700">
+                    <!-- Table light pool reflection (like Photo 1) -->
+                    <div id="table-halo-pool" class="w-[460px] h-14 mx-auto -mt-3 rounded-full bg-white/15 blur-xl transition-opacity duration-700"></div>
+                </div>
+            </div>
+
+            <!-- Top Floating Quick Tips / Selected Item Controls -->
+            <div class="absolute top-3 inset-x-4 flex items-center justify-between pointer-events-none z-20">
+                <div class="bg-black/45 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 shadow-sm flex items-center gap-2 pointer-events-auto">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span id="canvas-hint" class="text-xs font-medium text-white/90">Drag plants, rocks & bridges • Click swimming animals to interact!</span>
+                </div>
+
+                <div class="flex items-center gap-1.5 pointer-events-auto">
+                    <button onclick="clearAllItems()" class="px-3 py-1.5 rounded-full bg-black/45 hover:bg-rose-950/80 text-white/80 hover:text-rose-200 border border-white/15 text-xs font-semibold shadow-sm transition flex items-center gap-1">
+                        <i class="ph ph-trash"></i>
+                        <span class="hidden sm:inline">Reset Scene</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Floating Selected Item Inspector Toolbar -->
+            <div id="item-inspector" class="hidden absolute bottom-3 z-30 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-botanical-200 shadow-2xl flex flex-wrap items-center gap-2 sm:gap-2.5 transition-all">
+                <div class="flex items-center gap-1.5 pr-2 border-r border-botanical-200">
+                    <span id="inspector-name" class="text-xs font-bold text-botanical-900">Bonsai</span>
+                </div>
+
+                <!-- Scale -->
+                <div class="flex items-center gap-1">
+                    <button onclick="transformSelected('scale', -0.12)" class="p-1.5 rounded-lg hover:bg-botanical-100 text-botanical-700 transition" title="Shrink">
+                        <i class="ph-bold ph-minus text-xs"></i>
+                    </button>
+                    <span class="text-[11px] font-semibold text-botanical-600 w-9 text-center" id="inspector-scale">100%</span>
+                    <button onclick="transformSelected('scale', 0.12)" class="p-1.5 rounded-lg hover:bg-botanical-100 text-botanical-700 transition" title="Enlarge">
+                        <i class="ph-bold ph-plus text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Rotate -->
+                <div class="flex items-center gap-1 border-l border-botanical-200 pl-2">
+                    <button onclick="transformSelected('rotate', -12)" class="p-1.5 rounded-lg hover:bg-botanical-100 text-botanical-700 transition" title="Rotate Left">
+                        <i class="ph-bold ph-arrow-counter-clockwise text-sm"></i>
+                    </button>
+                    <button onclick="transformSelected('rotate', 12)" class="p-1.5 rounded-lg hover:bg-botanical-100 text-botanical-700 transition" title="Rotate Right">
+                        <i class="ph-bold ph-arrow-clockwise text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- Flip & Layering -->
+                <div class="flex items-center gap-1 border-l border-botanical-200 pl-2">
+                    <button onclick="transformSelected('flip')" class="p-1.5 rounded-lg hover:bg-botanical-100 text-botanical-700 transition" title="Flip Horizontal">
+                        <i class="ph-bold ph-arrows-left-right text-sm"></i>
+                    </button>
+                    <button onclick="transformSelected('layer', 1)" class="p-1.5 rounded-lg hover:bg-botanical-100 text-botanical-700 transition" title="Bring Forward">
+                        <i class="ph-bold ph-caret-up text-sm"></i>
+                    </button>
+                    <button onclick="transformSelected('layer', -1)" class="p-1.5 rounded-lg hover:bg-botanical-100 text-botanical-700 transition" title="Send to Back">
+                        <i class="ph-bold ph-caret-down text-sm"></i>
+                    </button>
+                    <button onclick="duplicateSelected()" class="p-1.5 rounded-lg hover:bg-botanical-100 text-botanical-700 transition" title="Duplicate">
+                        <i class="ph-bold ph-copy text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- Delete -->
+                <button onclick="deleteSelected()" class="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 transition ml-1" title="Delete Item (Del)">
+                    <i class="ph-bold ph-trash text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Interactive SVG Terrarium Container -->
+            <div class="relative w-full h-full flex items-center justify-center p-1 sm:p-4">
+                <svg id="terrarium-svg" viewBox="0 0 600 650" class="w-full h-full max-w-[590px] max-h-[620px] drop-shadow-2xl overflow-visible touch-none">
+                    <defs id="svg-defs">
+                        <!-- Clip path updated dynamically per vessel -->
+                        <clipPath id="vessel-clip">
+                            <path id="vessel-clip-path" d="" />
+                        </clipPath>
+
+                        <!-- Glass sheen gradients -->
+                        <linearGradient id="glass-body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16" />
+                            <stop offset="40%" stop-color="#d8f3dc" stop-opacity="0.04" />
+                            <stop offset="75%" stop-color="#1b4332" stop-opacity="0.08" />
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.18" />
+                        </linearGradient>
+
+                        <linearGradient id="glass-highlight-left" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.48" />
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                        </linearGradient>
+
+                        <!-- Volumetric Top LED Spotlight Cone -->
+                        <linearGradient id="halo-cone-grad" x1="50%" y1="0%" x2="50%" y2="100%">
+                            <stop offset="0%" stop-color="#fefce8" stop-opacity="0.52" />
+                            <stop offset="35%" stop-color="#ecfccb" stop-opacity="0.22" />
+                            <stop offset="80%" stop-color="#86efac" stop-opacity="0.06" />
+                            <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+                        </linearGradient>
+
+                        <!-- Turquoise Lagoon Water Gradient -->
+                        <linearGradient id="water-turquoise-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.52" />
+                            <stop offset="55%" stop-color="#06b6d4" stop-opacity="0.65" />
+                            <stop offset="100%" stop-color="#0e7490" stop-opacity="0.82" />
+                        </linearGradient>
+
+                        <!-- Emerald Nature Aquarium Water Gradient -->
+                        <linearGradient id="water-emerald-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#34d399" stop-opacity="0.32" />
+                            <stop offset="60%" stop-color="#059669" stop-opacity="0.48" />
+                            <stop offset="100%" stop-color="#064e3b" stop-opacity="0.72" />
+                        </linearGradient>
+
+                        <!-- Blackwater Botanical Water Gradient -->
+                        <linearGradient id="water-amber-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.32" />
+                            <stop offset="65%" stop-color="#d97706" stop-opacity="0.48" />
+                            <stop offset="100%" stop-color="#78350f" stop-opacity="0.72" />
+                        </linearGradient>
+
+                        <radialGradient id="fairy-glow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#fef08a" stop-opacity="1" />
+                            <stop offset="45%" stop-color="#facc15" stop-opacity="0.55" />
+                            <stop offset="100%" stop-color="#eab308" stop-opacity="0" />
+                        </radialGradient>
+
+                        <radialGradient id="cottage-window-glow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#fffbeb" stop-opacity="1" />
+                            <stop offset="45%" stop-color="#fbbf24" stop-opacity="0.75" />
+                            <stop offset="100%" stop-color="#ea580c" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+
+                    <!-- Wooden Base Stand & Ground Shadow -->
+                    <g id="vessel-stand-layer"></g>
+
+                    <!-- Physical Overhead Lamp Hardware (Gooseneck / Halo Ring / Linear LED Bar) -->
+                    <g id="lamp-hardware-layer"></g>
+
+                    <!-- Vessel Back Glass Wall -->
+                    <path id="vessel-back-path" d="" fill="url(#glass-body-grad)" stroke="rgba(255,255,255,0.35)" stroke-width="2" />
+
+                    <!-- Clipped Interior: Volumetric Light, Canyon Cliffs, Back Flora, Substrates, Water, Live Fauna, Front Flora -->
+                    <g id="vessel-interior" clip-path="url(#vessel-clip)">
+                        <!-- Deep Interior Ambient Shadow -->
+                        <rect id="interior-backdrop-tint" x="0" y="0" width="600" height="650" fill="#0b130e" opacity="0.55" />
+
+                        <!-- Volumetric Top Lamp Light Cone -->
+                        <polygon id="lamp-light-cone" points="255,85 345,85 520,585 80,585" fill="url(#halo-cone-grad)" opacity="0.9" />
+
+                        <!-- Sculpted Background Mossy Canyon / Mountain Relief -->
+                        <g id="terrain-relief-layer"></g>
+
+                        <!-- Back Hardscape & Flora Layer -->
+                        <g id="items-back-layer"></g>
+
+                        <!-- Autonomous Live Fauna Back Layer (e.g. background schooling fish) -->
+                        <g id="fauna-back-layer"></g>
+
+                        <!-- Substrate & Rock Layers Group -->
+                        <g id="substrate-group"></g>
+
+                        <!-- Foreground Flora, Bridges & Miniatures Layer -->
+                        <g id="items-front-layer"></g>
+
+                        <!-- Paludarium / Aquarium Water Body & Ripples -->
+                        <g id="water-body-layer"></g>
+
+                        <!-- Autonomous Live Fauna Front Layer (Fish, Shrimp, Frogs, Butterflies, Snails) -->
+                        <g id="fauna-front-layer"></g>
+
+                        <!-- String Fairy Lights Layer -->
+                        <g id="fairy-lights-layer"></g>
+
+                        <!-- Fireflies / Rising Micro-Bubbles Layer -->
+                        <g id="fireflies-layer"></g>
+
+                        <!-- Mist / Fish Food Particles Layer -->
+                        <g id="mist-layer"></g>
+                    </g>
+
+                    <!-- Unclipped Selection Box Overlay -->
+                    <g id="selection-overlay" class="pointer-events-none"></g>
+
+                    <!-- Vessel Front Glass Reflections & Rim -->
+                    <g id="vessel-front-glass" class="pointer-events-none"></g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- RIGHT SIDEBAR: Ecosystem Harmony & Live Fauna Telemetry -->
+        <aside class="hidden lg:flex w-72 xl:w-80 bg-white/95 backdrop-blur-md border-l border-botanical-200 flex-col z-20 shrink-0 p-4 overflow-y-auto space-y-4 order-3">
+            <!-- Harmony Score Card -->
+            <div class="p-4 rounded-2xl bg-gradient-to-br from-botanical-50 to-botanical-100/80 border border-botanical-200 shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-botanical-600">Ecosystem Balance</span>
+                    <span id="health-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Thriving</span>
+                </div>
+
+                <div class="flex items-baseline gap-2 my-1">
+                    <span id="harmony-score" class="font-display font-bold text-4xl text-botanical-900">96%</span>
+                    <span id="biome-type" class="text-xs font-semibold text-botanical-600">Zen Wabi-Kusa</span>
+                </div>
+
+                <!-- Health Progress Bar -->
+                <div class="w-full h-2.5 bg-white rounded-full overflow-hidden border border-botanical-200 my-2.5">
+                    <div id="harmony-bar" class="h-full bg-gradient-to-r from-emerald-500 to-botanical-500 rounded-full transition-all duration-500" style="width: 96%"></div>
+                </div>
+
+                <p id="ecosystem-feedback" class="text-xs text-botanical-700 leading-relaxed mt-2">
+                    Balanced canopy lighting, lush moss cushions, and active micro-fauna create a self-sustaining biosphere.
+                </p>
+            </div>
+
+            <!-- Live Fauna Activity Monitor -->
+            <div class="p-3.5 rounded-2xl bg-emerald-950 text-emerald-50 border border-emerald-800 space-y-2.5 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        <span>Live Fauna Bio-Load</span>
+                    </h3>
+                    <span id="fauna-count-pill" class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-800 text-emerald-200">0 Active</span>
+                </div>
+                <p id="fauna-status-text" class="text-[11px] text-emerald-200/90 leading-relaxed">
+                    Add schooling Neon Tetras, Red Cherry Shrimp, Tree Frogs, or Butterflies from the Fauna tab.
+                </p>
+                <div class="flex gap-1.5 pt-1">
+                    <button onclick="addFaunaGroup('tetra', 6)" class="flex-1 py-1.5 px-2 rounded-xl bg-emerald-800/90 hover:bg-emerald-700 text-[11px] font-semibold text-white transition text-center">
+                        +6 Neon Tetras
+                    </button>
+                    <button onclick="addFaunaGroup('shrimp', 3)" class="flex-1 py-1.5 px-2 rounded-xl bg-emerald-800/90 hover:bg-emerald-700 text-[11px] font-semibold text-white transition text-center">
+                        +3 Cherry Shrimp
+                    </button>
+                </div>
+            </div>
+
+            <!-- Moisture & Light Balance Meters -->
+            <div class="p-4 rounded-2xl bg-white border border-botanical-200 space-y-3.5 shadow-sm">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-botanical-600 flex items-center gap-1.5">
+                    <i class="ph-fill ph-scales text-botanical-500 text-sm"></i>
+                    <span>Microclimate Telemetry</span>
+                </h3>
+
+                <!-- Moisture Meter -->
+                <div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-sky-700 flex items-center gap-1"><i class="ph-fill ph-drop"></i> Humidity & Water</span>
+                        <span id="moisture-label" class="text-botanical-700">78%</span>
+                    </div>
+                    <div class="relative w-full h-2.5 bg-sky-50 rounded-full overflow-hidden border border-sky-200">
+                        <div id="moisture-target" class="absolute top-0 bottom-0 bg-sky-200/70 border-x border-sky-400 transition-all duration-500" style="left: 50%; width: 35%;"></div>
+                        <div id="moisture-bar" class="h-full bg-gradient-to-r from-sky-400 to-cyan-500 rounded-full transition-all duration-500 relative z-10" style="width: 78%"></div>
+                    </div>
+                </div>
+
+                <!-- Light Meter -->
+                <div>
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-amber-700 flex items-center gap-1"><i class="ph-fill ph-sun"></i> PAR Spotlight</span>
+                        <span id="light-label" class="text-botanical-700">75%</span>
+                    </div>
+                    <div class="relative w-full h-2.5 bg-amber-50 rounded-full overflow-hidden border border-amber-200">
+                        <div id="light-target" class="absolute top-0 bottom-0 bg-amber-200/70 border-x border-amber-400 transition-all duration-500" style="left: 45%; width: 35%;"></div>
+                        <div id="light-bar" class="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-500 relative z-10" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <!-- Filtration & Drainage Checklist -->
+                <div class="pt-2 border-t border-botanical-100 space-y-1.5 text-xs">
+                    <div class="flex items-center justify-between">
+                        <span class="text-botanical-700">Drainage / Aqua Soil</span>
+                        <span id="check-drainage" class="font-semibold text-emerald-600 flex items-center gap-1"><i class="ph-fill ph-check-circle"></i> Active</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-botanical-700">Charcoal Bio-Filter</span>
+                        <span id="check-charcoal" class="font-semibold text-emerald-600 flex items-center gap-1"><i class="ph-fill ph-check-circle"></i> Active</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-botanical-700">Fauna Oxygenation</span>
+                        <span id="check-guild" class="font-semibold text-emerald-600 flex items-center gap-1"><i class="ph-fill ph-check-circle"></i> Optimal</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Summary -->
+            <div class="p-4 rounded-2xl bg-white border border-botanical-200 flex-1 flex flex-col min-h-[140px] shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-botanical-600">Scene Elements</h3>
+                    <span id="item-count-badge" class="text-xs font-bold px-2 py-0.5 rounded-full bg-botanical-100 text-botanical-700">0</span>
+                </div>
+                <div id="placed-items-list" class="flex-1 overflow-y-auto space-y-1.5 pr-1 text-xs">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Snapshot Modal -->
+    <div id="snapshot-modal" class="hidden fixed inset-0 z-50 bg-botanical-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-botanical-200 animate-[fadeIn_0.2s_ease]">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="font-display font-bold text-xl text-botanical-900">Your Terrarium Card</h2>
+                    <p class="text-xs text-botanical-600">Right-click or click Download to save your botanical creation</p>
+                </div>
+                <button onclick="closeSnapshotModal()" class="p-2 rounded-full hover:bg-botanical-100 text-botanical-600">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+            </div>
+            <div class="bg-botanical-50 rounded-2xl p-3 border border-botanical-200 flex items-center justify-center">
+                <img id="snapshot-img" alt="Terrarium Snapshot" class="max-h-[360px] w-auto rounded-xl shadow-sm" />
+            </div>
+            <div class="mt-5 flex items-center justify-between gap-3">
+                <div id="snapshot-stats" class="text-xs text-botanical-700 font-medium"></div>
+                <div class="flex gap-2">
+                    <button onclick="closeSnapshotModal()" class="px-4 py-2 rounded-xl border border-botanical-200 text-botanical-700 text-xs font-semibold hover:bg-botanical-50">Close</button>
+                    <a id="snapshot-download" download="my-terrarium.png" class="px-4 py-2 rounded-xl bg-botanical-600 hover:bg-botanical-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+                        <i class="ph-bold ph-download-simple"></i>
+                        <span>Download PNG</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SoundFX = {
+            enabled: true,
+            ctx: null,
+            init() {
+                if (!this.ctx) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (AudioCtx) this.ctx = new AudioCtx();
+                }
+                if (this.ctx && this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+            playPop(freq = 420) {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(freq * 1.45, this.ctx.currentTime + 0.09);
+                    gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.1);
+                } catch (e) {}
+            },
+            playMist() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    const bufferSize = this.ctx.sampleRate * 0.45;
+                    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        data[i] = Math.random() * 2 - 1;
+                    }
+                    const noise = this.ctx.createBufferSource();
+                    noise.buffer = buffer;
+                    const filter = this.ctx.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.value = 2600;
+                    const gain = this.ctx.createGain();
+                    gain.gain.setValueAtTime(0.01, this.ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.07, this.ctx.currentTime + 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.44);
+                    noise.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    noise.start();
+                } catch (e) {}
+            },
+            playChime() {
+                if (!this.enabled) return;
+                try {
+                    this.init();
+                    [523.25, 659.25, 783.99, 1046.5].forEach((f, idx) => {
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(f, this.ctx.currentTime + idx * 0.055);
+                        gain.gain.setValueAtTime(0.055, this.ctx.currentTime + idx * 0.055);
+                        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + idx * 0.055 + 0.35);
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+                        osc.start(this.ctx.currentTime + idx * 0.055);
+                        osc.stop(this.ctx.currentTime + idx * 0.055 + 0.36);
+                    });
+                } catch (e) {}
+            }
+        };
+
+        const VESSELS = {
+            halo_jar: {
+                id: 'halo_jar',
+                name: 'Gooseneck Halo Canyon Jar',
+                desc: 'Curved Wabi-Kusa cylinder with an integrated top gooseneck LED spotlight (Reference 1).',
+                humidityRetention: 38,
+                baseY: 575,
+                topY: 165,
+                minX: 130,
+                maxX: 470,
+                lampType: 'gooseneck',
+                clipPath: 'M 205 165 L 395 165 C 468 188, 478 280, 474 425 C 470 515, 442 562, 395 575 L 205 575 C 158 562, 130 515, 126 425 C 122 280, 132 188, 205 165 Z',
+                standSvg: `
+                    <ellipse cx="300" cy="590" rx="220" ry="26" fill="rgba(0,0,0,0.65)" />
+                    <rect x="175" y="570" width="250" height="22" rx="10" fill="#111613" stroke="#2b332e" stroke-width="2" />
+                    <ellipse cx="300" cy="586" rx="145" ry="6" fill="rgba(255,255,255,0.22)" />
+                `,
+                frontGlass: `
+                    <path d="M 205 165 L 395 165 C 468 188, 478 280, 474 425 C 470 515, 442 562, 395 575 L 205 575 C 158 562, 130 515, 126 425 C 122 280, 132 188, 205 165 Z" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="3" />
+                    <ellipse cx="300" cy="165" rx="95" ry="8" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.75)" stroke-width="2.5" />
+                    <path d="M 150 220 C 138 300, 138 440, 175 535" fill="none" stroke="url(#glass-highlight-left)" stroke-width="12" stroke-linecap="round" />
+                    <path d="M 452 225 C 462 305, 460 440, 428 530" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="5" stroke-linecap="round" />
+                `
+            },
+            teardrop_cloche: {
+                id: 'teardrop_cloche',
+                name: 'Zen Ring-Lamp Teardrop Cloche',
+                desc: 'Tall organic egg-shaped glass cloche on a warm butcher-block wood base with halo ring light (Reference 2).',
+                humidityRetention: 42,
+                baseY: 565,
+                topY: 135,
+                minX: 135,
+                maxX: 465,
+                lampType: 'ring',
+                clipPath: 'M 215 135 L 385 135 C 445 215, 475 365, 455 485 C 442 542, 412 562, 375 565 L 225 565 C 188 562, 158 542, 145 485 C 125 365, 155 215, 215 135 Z',
+                standSvg: `
+                    <polygon points="105,605 155,555 445,555 495,605" fill="#d4a373" stroke="#9c6644" stroke-width="2" />
+                    <rect x="105" y="605" width="390" height="16" rx="3" fill="#b07d4f" stroke="#7f4f24" stroke-width="1.5" />
+                    <ellipse cx="300" cy="570" rx="165" ry="14" fill="rgba(0,0,0,0.35)" />
+                `,
+                frontGlass: `
+                    <path d="M 215 135 L 385 135 C 445 215, 475 365, 455 485 C 442 542, 412 562, 375 565 L 225 565 C 188 562, 158 542, 145 485 C 125 365, 155 215, 215 135 Z" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="3.5" />
+                    <ellipse cx="300" cy="135" rx="85" ry="9" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" />
+                    <path d="M 180 185 C 148 285, 146 425, 182 520" fill="none" stroke="url(#glass-highlight-left)" stroke-width="11" stroke-linecap="round" />
+                `
+            },
+            lagoon_bowl: {
+                id: 'lagoon_bowl',
+                name: 'Spherical Lagoon Paludarium Bowl',
+                desc: 'Wide crystal-clear spherical bowl ideal for turquoise water lagoons and mossy island cliffs (Reference 3).',
+                humidityRetention: 24,
+                baseY: 565,
+                topY: 145,
+                minX: 85,
+                maxX: 515,
+                lampType: 'none',
+                clipPath: 'M 165 145 L 435 145 C 538 225, 548 455, 415 565 L 185 565 C 52 455, 62 225, 165 145 Z',
+                standSvg: `
+                    <ellipse cx="300" cy="575" rx="185" ry="18" fill="rgba(0,0,0,0.42)" />
+                `,
+                frontGlass: `
+                    <path d="M 165 145 L 435 145 C 538 225, 548 455, 415 565 L 185 565 C 52 455, 62 225, 165 145 Z" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="3.5" />
+                    <ellipse cx="300" cy="145" rx="135" ry="11" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.85)" stroke-width="3" />
+                    <path d="M 135 205 C 88 295, 92 435, 175 525" fill="none" stroke="url(#glass-highlight-left)" stroke-width="14" stroke-linecap="round" />
+                    <path d="M 465 205 C 508 295, 502 435, 425 525" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="6" stroke-linecap="round" />
+                `
+            },
+            rimless_cube: {
+                id: 'rimless_cube',
+                name: 'Frameless Architectural Cube Tank',
+                desc: 'Minimalist low-iron glass cube with black silicone seams for mountain passes & nature aquascapes (Reference 4 & 6).',
+                humidityRetention: 28,
+                baseY: 575,
+                topY: 135,
+                minX: 115,
+                maxX: 485,
+                lampType: 'linear',
+                clipPath: 'M 115 135 L 485 135 L 485 575 L 115 575 Z',
+                standSvg: `
+                    <polygon points="85,605 110,572 490,572 515,605" fill="#e6ccb2" stroke="#b08968" stroke-width="2" />
+                    <rect x="85" y="605" width="430" height="14" fill="#ddb892" stroke="#9c6644" stroke-width="1.5" />
+                `,
+                frontGlass: `
+                    <!-- 3D Perspective Back Top Edge -->
+                    <line x1="115" y1="135" x2="140" y2="118" stroke="rgba(255,255,255,0.45)" stroke-width="2" />
+                    <line x1="485" y1="135" x2="460" y2="118" stroke="rgba(255,255,255,0.45)" stroke-width="2" />
+                    <line x1="140" y1="118" x2="460" y2="118" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" />
+                    <!-- Main Front Cube Frame -->
+                    <rect x="115" y="135" width="370" height="440" fill="none" stroke="#18181b" stroke-width="4" />
+                    <rect x="117" y="137" width="366" height="436" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" />
+                    <path d="M 132 155 L 132 545" stroke="url(#glass-highlight-left)" stroke-width="10" stroke-linecap="round" />
+                `
+            },
+            grand_vivarium: {
+                id: 'grand_vivarium',
+                name: 'Grand Twin-Tier Paludarium Tank',
+                desc: 'Wide exhibition paludarium with overhead linear grow bar, upper mountain village & lower aquarium (Reference 5).',
+                humidityRetention: 35,
+                baseY: 575,
+                topY: 130,
+                minX: 70,
+                maxX: 530,
+                lampType: 'linear_wide',
+                clipPath: 'M 70 130 L 530 130 L 530 575 L 70 575 Z',
+                standSvg: `
+                    <rect x="62" y="575" width="476" height="28" rx="4" fill="#111827" stroke="#374151" stroke-width="2" />
+                `,
+                frontGlass: `
+                    <rect x="70" y="130" width="460" height="445" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="4" />
+                    <!-- Paludarium Front Air Vent Strip -->
+                    <rect x="70" y="385" width="460" height="7" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.65)" stroke-width="1" />
+                    <!-- Top Glass Clips -->
+                    <rect x="75" y="126" width="22" height="10" rx="2" fill="#e5e7eb" />
+                    <rect x="503" y="126" width="22" height="10" rx="2" fill="#e5e7eb" />
+                    <path d="M 88 150 L 88 555" stroke="url(#glass-highlight-left)" stroke-width="12" stroke-linecap="round" />
+                `
+            }
+        };
+
+        const SUBSTRATE_CATALOG = {
+            pebbles: {
+                name: 'River Drainage Gravel',
+                role: 'Drainage Base',
+                moistureBonus: 8,
+                defaultColor: '#a8a29e',
+                swatches: ['#a8a29e', '#d6d3d1', '#78716c', '#d97757', '#64748b']
+            },
+            charcoal: {
+                name: 'Activated Bio-Charcoal',
+                role: 'Purification',
+                moistureBonus: 5,
+                defaultColor: '#1c1917',
+                swatches: ['#1c1917', '#090d16', '#292524']
+            },
+            soil: {
+                name: 'Amazonia Aqua Soil',
+                role: 'Nutrient Substrate',
+                moistureBonus: 18,
+                defaultColor: '#3b281e',
+                swatches: ['#3b281e', '#261811', '#5c4033', '#6f4e37']
+            },
+            sand: {
+                name: 'White Cosmetic Silica Sand',
+                role: 'Mountain Path / Riverbed',
+                moistureBonus: -2,
+                defaultColor: '#f5ebe0',
+                swatches: ['#f5ebe0', '#ffffff', '#e6ccb2', '#d4a373', '#94a3b8']
+            },
+            moss: {
+                name: 'Pillow & Weeping Moss Carpet',
+                role: 'Lush Emerald Top',
+                moistureBonus: 24,
+                defaultColor: '#4d7c0f',
+                swatches: ['#4d7c0f', '#65a30d', '#3f6212', '#15803d', '#84cc16']
+            }
+        };
+
+        const ITEM_CATALOG = [
+            // ================= FLORA (BONSAI, AQUATIC & MOSS) =================
+            {
+                id: 'bonsai_canopy',
+                name: 'Ancient Moss Bonsai Tree',
+                category: 'plants',
+                guild: 'humid',
+                idealMoisture: [50, 95],
+                idealLight: [45, 90],
+                defaultScale: 1.25,
+                svg: `
+                    <g transform="translate(0, 6)" class="sway-foliage">
+                        <!-- Gnarled Bonsai Trunk & Roots -->
+                        <path d="M-18,4 C-10,-8 -8,-28 -14,-52 C-18,-68 -36,-82 -48,-92 M16,4 C6,-10 4,-32 8,-58 C12,-76 28,-88 42,-96" fill="none" stroke="#3d2817" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M-12,4 C-4,-15 -4,-45 -2,-78 L6,-78 C8,-45 8,-15 14,4 Z" fill="#4a321f" stroke="#2b1d12" stroke-width="2"/>
+                        <!-- Lush Multi-tiered Emerald Foliage Crown -->
+                        <ellipse cx="-38" cy="-88" rx="34" ry="18" fill="#2d6a4f" />
+                        <ellipse cx="32" cy="-92" rx="36" ry="19" fill="#2d6a4f" />
+                        <ellipse cx="0" cy="-104" rx="48" ry="24" fill="#40916c" />
+                        <ellipse cx="-26" cy="-96" rx="28" ry="15" fill="#65a30d" />
+                        <ellipse cx="24" cy="-98" rx="30" ry="16" fill="#65a30d" />
+                        <ellipse cx="0" cy="-110" rx="36" ry="18" fill="#84cc16" />
+                        <!-- Highlight leaf clusters -->
+                        <circle cx="-18" cy="-114" r="9" fill="#bef264" opacity="0.7"/>
+                        <circle cx="15" cy="-108" r="11" fill="#a3e635" opacity="0.8"/>
+                        <circle cx="-36" cy="-96" r="8" fill="#a3e635" opacity="0.75"/>
+                    </g>
+                `
+            },
+            {
+                id: 'cherry_blossom',
+                name: 'Pink Sakura Blossom Tree',
+                category: 'plants',
+                guild: 'humid',
+                idealMoisture: [45, 90],
+                idealLight: [55, 95],
+                defaultScale: 1.25,
+                svg: `
+                    <g transform="translate(0, 6)" class="sway-foliage">
+                        <!-- Trunk -->
+                        <path d="M-10,4 C-4,-18 -6,-48 -22,-78 M8,4 C2,-20 6,-50 26,-82" fill="none" stroke="#4a2c2a" stroke-width="5.5" stroke-linecap="round"/>
+                        <path d="M-7,4 C-2,-25 -2,-55 0,-88 L6,-88 C6,-55 6,-25 10,4 Z" fill="#5c3734" />
+                        <!-- Vibrant Pink Blossom Clouds (Reference 5) -->
+                        <ellipse cx="-34" cy="-84" rx="32" ry="18" fill="#be185d" />
+                        <ellipse cx="32" cy="-86" rx="34" ry="18" fill="#db2777" />
+                        <ellipse cx="0" cy="-102" rx="46" ry="24" fill="#ec4899" />
+                        <ellipse cx="-22" cy="-94" rx="26" ry="15" fill="#f472b6" />
+                        <ellipse cx="20" cy="-96" rx="28" ry="15" fill="#f472b6" />
+                        <ellipse cx="0" cy="-108" rx="34" ry="16" fill="#fbcfe8" />
+                    </g>
+                `
+            },
+            {
+                id: 'red_crypto',
+                name: 'Crimson Cryptocoryne Bush',
+                category: 'plants',
+                guild: 'humid',
+                idealMoisture: [55, 100],
+                idealLight: [50, 95],
+                defaultScale: 1.0,
+                svg: `
+                    <g transform="translate(0, 4)" class="sway-foliage">
+                        <path d="M0,0 C-14,-8 -28,-22 -34,-36 C-18,-32 -6,-18 0,0 Z" fill="#881337" stroke="#f43f5e" stroke-width="1"/>
+                        <path d="M0,0 C14,-8 28,-22 34,-36 C18,-32 6,-18 0,0 Z" fill="#881337" stroke="#f43f5e" stroke-width="1"/>
+                        <path d="M0,0 C-10,-18 -20,-38 -18,-52 C-6,-40 -2,-20 0,0 Z" fill="#be123c" stroke="#fb7185" stroke-width="1"/>
+                        <path d="M0,0 C10,-18 20,-38 18,-52 C6,-40 2,-20 0,0 Z" fill="#be123c" stroke="#fb7185" stroke-width="1"/>
+                        <path d="M0,0 C-8,-24 0,-48 0,-58 C6,-44 6,-22 0,0 Z" fill="#e11d48" stroke="#fda4af" stroke-width="1"/>
+                    </g>
+                `
+            },
+            {
+                id: 'vallisneria',
+                name: 'Aquatic Jungle Vallisneria',
+                category: 'plants',
+                guild: 'humid',
+                idealMoisture: [65, 100],
+                idealLight: [40, 90],
+                defaultScale: 1.15,
+                svg: `
+                    <g transform="translate(0, 4)" class="sway-foliage">
+                        <path d="M-8,0 Q-24,-45 -32,-95 Q-14,-50 -2,0 Z" fill="#15803d" opacity="0.9"/>
+                        <path d="M-4,0 Q-12,-58 -14,-115 Q0,-60 4,0 Z" fill="#22c55e" opacity="0.9"/>
+                        <path d="M2,0 Q16,-55 24,-108 Q8,-50 -2,0 Z" fill="#4ade80" opacity="0.85"/>
+                        <path d="M6,0 Q28,-40 38,-85 Q18,-38 2,0 Z" fill="#16a34a" opacity="0.9"/>
+                    </g>
+                `
+            },
+            {
+                id: 'fern',
+                name: 'Bolbitis Creeping Fern',
+                category: 'plants',
+                guild: 'humid',
+                idealMoisture: [55, 95],
+                idealLight: [35, 85],
+                defaultScale: 1.0,
+                svg: `
+                    <g transform="translate(0, 5)" class="sway-foliage">
+                        <path d="M0,0 Q-28,-38 -52,-65" fill="none" stroke="#386641" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M0,0 Q-12,-48 -22,-88" fill="none" stroke="#4f772d" stroke-width="3.2" stroke-linecap="round"/>
+                        <path d="M0,0 Q14,-50 26,-86" fill="none" stroke="#386641" stroke-width="3.2" stroke-linecap="round"/>
+                        <path d="M0,0 Q32,-35 55,-62" fill="none" stroke="#6a994e" stroke-width="3" stroke-linecap="round"/>
+                        <g fill="#65a30d">
+                            <ellipse cx="-18" cy="-24" rx="9" ry="4" transform="rotate(-35 -18 -24)"/>
+                            <ellipse cx="-32" cy="-42" rx="10" ry="4" transform="rotate(-35 -32 -42)"/>
+                            <ellipse cx="-45" cy="-58" rx="8" ry="3.5" transform="rotate(-35 -45 -58)"/>
+                            <ellipse cx="18" cy="-24" rx="9" ry="4" transform="rotate(35 18 -24)"/>
+                            <ellipse cx="34" cy="-42" rx="10" ry="4" transform="rotate(35 34 -42)"/>
+                            <ellipse cx="47" cy="-55" rx="8" ry="3.5" transform="rotate(35 47 -55)"/>
+                        </g>
+                        <g fill="#4d7c0f">
+                            <ellipse cx="-8" cy="-30" rx="10" ry="4.5" transform="rotate(-20 -8 -30)"/>
+                            <ellipse cx="-14" cy="-52" rx="11" ry="4.5" transform="rotate(-20 -14 -52)"/>
+                            <ellipse cx="9" cy="-32" rx="10" ry="4.5" transform="rotate(20 9 -32)"/>
+                            <ellipse cx="16" cy="-54" rx="11" ry="4.5" transform="rotate(20 16 -54)"/>
+                        </g>
+                    </g>
+                `
+            },
+            {
+                id: 'mosspuff',
+                name: 'Pillow Moss Cushion Mound',
+                category: 'plants',
+                guild: 'humid',
+                idealMoisture: [50, 98],
+                idealLight: [25, 85],
+                defaultScale: 1.1,
+                svg: `
+                    <g transform="translate(0, 4)">
+                        <path d="M-42,2 C-46,-24 -18,-36 0,-32 C22,-38 46,-22 42,2 Z" fill="#4d7c0f" stroke="#365314" stroke-width="1.5"/>
+                        <path d="M-28,-2 C-24,-20 -4,-26 12,-18 C26,-22 34,-12 28,-2 Z" fill="#84cc16" opacity="0.75"/>
+                        <ellipse cx="-8" cy="-16" rx="12" ry="6" fill="#bef264" opacity="0.45"/>
+                    </g>
+                `
+            },
+            {
+                id: 'fittonia',
+                name: 'Pink Nerve Fittonia',
+                category: 'plants',
+                guild: 'humid',
+                idealMoisture: [55, 95],
+                idealLight: [35, 80],
+                defaultScale: 1.0,
+                svg: `
+                    <g transform="translate(0, 4)">
+                        <g transform="translate(-18, -26) rotate(-28)">
+                            <path d="M0,22 C-16,14 -20,-12 0,-26 C20,-12 16,14 0,22 Z" fill="#2d6a4f" stroke="#1b4332" stroke-width="1.5"/>
+                            <path d="M0,20 L0,-22 M0,6 L-10,-2 M0,-4 L-11,-12 M0,2 L10,-6" stroke="#ff8fa3" stroke-width="1.6" stroke-linecap="round"/>
+                        </g>
+                        <g transform="translate(18, -24) rotate(28)">
+                            <path d="M0,22 C-16,14 -20,-12 0,-26 C20,-12 16,14 0,22 Z" fill="#2d6a4f" stroke="#1b4332" stroke-width="1.5"/>
+                            <path d="M0,20 L0,-22 M0,6 L-10,-2 M0,-4 L-11,-12 M0,2 L10,-6" stroke="#ff8fa3" stroke-width="1.6" stroke-linecap="round"/>
+                        </g>
+                        <g transform="translate(0, -38)">
+                            <path d="M0,24 C-18,14 -22,-14 0,-30 C22,-14 18,14 0,24 Z" fill="#40916c" stroke="#1b4332" stroke-width="1.5"/>
+                            <path d="M0,22 L0,-25 M0,8 L-12,-2 M0,-4 L-12,-14 M0,4 L12,-5" stroke="#ffb3c1" stroke-width="1.8" stroke-linecap="round"/>
+                        </g>
+                    </g>
+                `
+            },
+            {
+                id: 'blossom_sprig',
+                name: 'Red Canyon Wildflowers',
+                category: 'plants',
+                guild: 'humid',
+                idealMoisture: [45, 92],
+                idealLight: [45, 90],
+                defaultScale: 1.0,
+                svg: `
+                    <g transform="translate(0, 4)">
+                        <path d="M-12,0 Q-18,-18 -24,-32 M0,0 Q2,-22 6,-38 M12,0 Q20,-16 26,-28" stroke="#3f6212" stroke-width="2" fill="none"/>
+                        <circle cx="-24" cy="-32" r="5.5" fill="#ef4444"/>
+                        <circle cx="-14" cy="-22" r="4.5" fill="#f87171"/>
+                        <circle cx="6" cy="-38" r="6" fill="#dc2626"/>
+                        <circle cx="-2" cy="-26" r="4.5" fill="#fb7185"/>
+                        <circle cx="26" cy="-28" r="5" fill="#ef4444"/>
+                    </g>
+                `
+            },
+
+            // ================= ZEN HARDSCAPE, BRIDGES & MINIATURES =================
+            {
+                id: 'seiryu_crag',
+                name: 'Seiryu Alpine Mountain Crag',
+                category: 'decor',
+                guild: 'neutral',
+                defaultScale: 1.2,
+                svg: `
+                    <g transform="translate(0, 6)">
+                        <!-- Main Jagged Limestone Peak -->
+                        <polygon points="-46,0 -38,-56 -18,-96 6,-118 28,-82 44,-36 48,0" fill="#475569" stroke="#1e293b" stroke-width="2" stroke-linejoin="round"/>
+                        <!-- Light Quartz Striation Facets -->
+                        <polygon points="-18,-96 6,-118 14,-72 -12,-44" fill="#94a3b8" opacity="0.65"/>
+                        <polygon points="6,-118 28,-82 22,-28 2,-48" fill="#cbd5e1" opacity="0.45"/>
+                        <path d="M-28,-38 L-8,-64 L12,-52 M-16,-14 L8,-42 L30,-22" fill="none" stroke="#f1f5f9" stroke-width="1.8" opacity="0.6"/>
+                        <!-- Crevice Moss Accents -->
+                        <ellipse cx="-22" cy="-42" rx="12" ry="5" fill="#65a30d" opacity="0.85"/>
+                        <ellipse cx="18" cy="-28" rx="14" ry="6" fill="#4d7c0f" opacity="0.85"/>
+                    </g>
+                `
+            },
+            {
+                id: 'rope_bridge',
+                name: 'Canyon Rope Suspension Bridge',
+                category: 'decor',
+                guild: 'neutral',
+                defaultScale: 1.15,
+                svg: `
+                    <g transform="translate(0, -18)">
+                        <!-- Wooden End Posts -->
+                        <rect x="-78" y="-24" width="5" height="28" rx="1.5" fill="#78350f" stroke="#451a03" stroke-width="1.2"/>
+                        <rect x="73" y="-24" width="5" height="28" rx="1.5" fill="#78350f" stroke="#451a03" stroke-width="1.2"/>
+                        <!-- Top Handrail Ropes -->
+                        <path d="M-75,-20 Q0,8 75,-20" fill="none" stroke="#d6d3d1" stroke-width="2"/>
+                        <!-- Lower Deck Cable -->
+                        <path d="M-75,-4 Q0,24 75,-4" fill="none" stroke="#a8a29e" stroke-width="2.2"/>
+                        <!-- Vertical Suspender Ropes -->
+                        <line x1="-50" y1="-12" x2="-50" y2="3" stroke="#d6d3d1" stroke-width="1.2"/>
+                        <line x1="-25" y1="-6" x2="-25" y2="9" stroke="#d6d3d1" stroke-width="1.2"/>
+                        <line x1="0" y1="-4" x2="0" y2="11" stroke="#d6d3d1" stroke-width="1.2"/>
+                        <line x1="25" y1="-6" x2="25" y2="9" stroke="#d6d3d1" stroke-width="1.2"/>
+                        <line x1="50" y1="-12" x2="50" y2="3" stroke="#d6d3d1" stroke-width="1.2"/>
+                        <!-- Wooden Planks -->
+                        <g fill="#92400e" stroke="#451a03" stroke-width="1">
+                            <rect x="-64" y="-3" width="8" height="4" rx="1" transform="rotate(10 -60 0)"/>
+                            <rect x="-46" y="2" width="8" height="4" rx="1" transform="rotate(7 -42 2)"/>
+                            <rect x="-28" y="6" width="8" height="4" rx="1" transform="rotate(4 -24 6)"/>
+                            <rect x="-10" y="8" width="8" height="4" rx="1"/>
+                            <rect x="8" y="8" width="8" height="4" rx="1"/>
+                            <rect x="24" y="6" width="8" height="4" rx="1" transform="rotate(-4 28 6)"/>
+                            <rect x="42" y="2" width="8" height="4" rx="1" transform="rotate(-7 46 2)"/>
+                            <rect x="58" y="-3" width="8" height="4" rx="1" transform="rotate(-10 62 0)"/>
+                        </g>
+                    </g>
+                `
+            },
+            {
+                id: 'stone_steps',
+                name: 'Slate Mountain Staircase',
+                category: 'decor',
+                guild: 'neutral',
+                defaultScale: 1.15,
+                svg: `
+                    <g transform="translate(0, 6)">
+                        <!-- Stepped Slate Slabs (Reference 2) -->
+                        <g stroke="#1e293b" stroke-width="1.5">
+                            <rect x="-24" y="-10" width="52" height="10" rx="3" fill="#475569"/>
+                            <rect x="-20" y="-12" width="46" height="4" rx="1.5" fill="#94a3b8"/>
+
+                            <rect x="-14" y="-24" width="46" height="10" rx="3" fill="#334155"/>
+                            <rect x="-10" y="-26" width="40" height="4" rx="1.5" fill="#94a3b8"/>
+
+                            <rect x="-28" y="-38" width="44" height="10" rx="3" fill="#475569"/>
+                            <rect x="-24" y="-40" width="38" height="4" rx="1.5" fill="#cbd5e1"/>
+
+                            <rect x="-38" y="-52" width="40" height="10" rx="3" fill="#334155"/>
+                            <rect x="-34" y="-54" width="34" height="4" rx="1.5" fill="#94a3b8"/>
+
+                            <rect x="-46" y="-66" width="36" height="10" rx="3" fill="#475569"/>
+                            <rect x="-42" y="-68" width="30" height="4" rx="1.5" fill="#cbd5e1"/>
+                        </g>
+                    </g>
+                `
+            },
+            {
+                id: 'waterfall_chute',
+                name: 'Cascading Mountain Waterfall',
+                category: 'decor',
+                guild: 'neutral',
+                defaultScale: 1.15,
+                svg: `
+                    <g transform="translate(0, 8)">
+                        <!-- Dark Flanking Cliff Rocks -->
+                        <polygon points="-26,0 -22,-85 -8,-95 16,-95 24,-80 28,0" fill="#334155" stroke="#1e293b" stroke-width="1.5"/>
+                        <!-- White Foaming Cascade Stream -->
+                        <path d="M-6,-92 Q-10,-45 -14,0 L14,0 Q10,-45 8,-92 Z" fill="#e0f2fe" opacity="0.88"/>
+                        <path d="M-2,-90 L-6,0 M4,-90 L8,0" stroke="#ffffff" stroke-width="3.5" class="waterfall-stream" stroke-linecap="round"/>
+                        <!-- Base Splash Foam -->
+                        <ellipse cx="0" cy="0" rx="22" ry="6" fill="#ffffff" opacity="0.85"/>
+                        <circle cx="-10" cy="-3" r="3" fill="#bae6fd"/>
+                        <circle cx="12" cy="-2" r="3.5" fill="#bae6fd"/>
+                    </g>
+                `
+            },
+            {
+                id: 'pagoda',
+                name: 'Ancient Zen Cliff Pagoda',
+                category: 'decor',
+                guild: 'neutral',
+                defaultScale: 1.05,
+                svg: `
+                    <g transform="translate(0, 2)">
+                        <!-- Stone Foundation -->
+                        <rect x="-18" y="-8" width="36" height="8" rx="1.5" fill="#64748b" stroke="#1e293b" stroke-width="1.5"/>
+                        <!-- First Tier Timber Walls & Warm Window -->
+                        <rect x="-13" y="-26" width="26" height="18" fill="#451a03" stroke="#290f02" stroke-width="1.5"/>
+                        <rect x="-6" y="-22" width="12" height="10" rx="1" fill="#fde047" class="fairy-bulb"/>
+                        <!-- First Sweeping Eave Roof -->
+                        <path d="M-28,-24 Q0,-36 28,-24 L20,-32 L-20,-32 Z" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+                        <!-- Second Tier -->
+                        <rect x="-9" y="-44" width="18" height="12" fill="#451a03" stroke="#290f02" stroke-width="1.5"/>
+                        <path d="M-22,-42 Q0,-54 22,-42 L14,-49 L-14,-49 Z" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+                        <!-- Spire Finial -->
+                        <line x1="0" y1="-50" x2="0" y2="-64" stroke="#d97706" stroke-width="2.2" stroke-linecap="round"/>
+                    </g>
+                `
+            },
+            {
+                id: 'tea_cottage',
+                name: 'Glowing Cliffside Tea House',
+                category: 'decor',
+                guild: 'neutral',
+                defaultScale: 1.1,
+                svg: `
+                    <g transform="translate(0, 2)">
+                        <!-- Wooden Stilts & Porch Deck (Reference 5) -->
+                        <rect x="-32" y="-8" width="64" height="4" fill="#78350f" stroke="#451a03" stroke-width="1"/>
+                        <line x1="-26" y1="-4" x2="-26" y2="6" stroke="#451a03" stroke-width="3"/>
+                        <line x1="26" y1="-4" x2="26" y2="6" stroke="#451a03" stroke-width="3"/>
+                        <!-- Cottage Body -->
+                        <rect x="-24" y="-30" width="48" height="22" fill="#5c3724" stroke="#291509" stroke-width="1.5"/>
+                        <!-- Glowing Shoji Windows -->
+                        <circle cx="0" cy="-19" r="24" fill="url(#cottage-window-glow)" class="fairy-bulb"/>
+                        <rect x="-16" y="-24" width="12" height="12" rx="1" fill="#fef08a" stroke="#451a03" stroke-width="1.2"/>
+                        <rect x="4" y="-24" width="12" height="12" rx="1" fill="#fde047" stroke="#451a03" stroke-width="1.2"/>
+                        <!-- Tiled Roof -->
+                        <polygon points="-34,-28 -22,-44 22,-44 34,-28" fill="#1e293b" stroke="#0f172a" stroke-width="1.5" stroke-linejoin="round"/>
+                    </g>
+                `
+            },
+            {
+                id: 'wanderer',
+                name: 'Red-Cloak Samurai Wanderer',
+                category: 'decor',
+                guild: 'neutral',
+                defaultScale: 1.0,
+                svg: `
+                    <g transform="translate(0, 2)">
+                        <!-- Flowing Red Cloak (Reference 3) -->
+                        <path d="M-4,-28 C6,-26 18,-18 24,-8 C14,-6 4,-8 -2,-14 Z" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                        <!-- Dark Robes -->
+                        <path d="M-7,0 L-4,-28 L4,-28 L7,0 Z" fill="#1e293b" stroke="#0f172a" stroke-width="1.2"/>
+                        <!-- Walking Staff / Katana -->
+                        <line x1="-10" y1="2" x2="10" y2="-32" stroke="#d6d3d1" stroke-width="1.5" stroke-linecap="round"/>
+                        <!-- Conical Bamboo Kasa Hat (Reference 1 & 3) -->
+                        <polygon points="-14,-29 0,-38 14,-29" fill="#f59e0b" stroke="#b45309" stroke-width="1.2" stroke-linejoin="round"/>
+                    </g>
+                `
+            },
+            {
+                id: 'driftwood',
+                name: 'Spiderwood Bonsai Root',
+                category: 'decor',
+                guild: 'neutral',
+                defaultScale: 1.1,
+                svg: `
+                    <g transform="translate(0, 4)">
+                        <path d="M-42,0 C-28,-12 -14,-28 8,-36 C28,-43 44,-56 54,-68 C42,-46 28,-32 14,-24 C24,-22 38,-22 48,-28 C34,-14 18,-10 -2,-6 L-28,0 Z" fill="#9c6644" stroke="#582f0e" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M-18,-6 Q4,-18 24,-34" stroke="#7f4f24" stroke-width="1.5" fill="none"/>
+                    </g>
+                `
+            }
+        ];
+
+        const FAUNA_CATALOG = {
+            tetra: {
+                id: 'tetra',
+                name: 'Neon & Cardinal Tetra',
+                badge: 'Aquatic Schooling',
+                desc: 'Iridescent blue-and-crimson fish that school smoothly through submerged plants (Reference 6).',
+                zone: 'water'
+            },
+            shrimp: {
+                id: 'shrimp',
+                name: 'Red Cherry Shrimp',
+                badge: 'Bottom Grazer',
+                desc: 'Vibrant crimson Neocaridina shrimp that scuttle over moss and stones picking at biofilm.',
+                zone: 'bottom'
+            },
+            koi: {
+                id: 'koi',
+                name: 'Golden Medaka Ricefish',
+                badge: 'Surface Swimmer',
+                desc: 'Graceful golden-orange surface fish that glides through turquoise lagoons.',
+                zone: 'water'
+            },
+            frog: {
+                id: 'frog',
+                name: 'Emerald Moss Tree Frog',
+                badge: 'Amphibian Hopper',
+                desc: 'Breathes with a pulsing vocal throat, blinks, and hops periodically across mossy rocks.',
+                zone: 'land'
+            },
+            butterfly: {
+                id: 'butterfly',
+                name: 'Blue Morpho Forest Butterfly',
+                badge: 'Canopy Flyer',
+                desc: 'Flutters smoothly around bonsai canopies and rests on blossoms with gently folding wings.',
+                zone: 'air'
+            },
+            ladybug: {
+                id: 'ladybug',
+                name: 'Spotted Botanical Ladybug',
+                badge: 'Canopy Crawler',
+                desc: 'Crawls along rock ridges, suspension bridges, and bonsai trunks.',
+                zone: 'land'
+            }
+        };
+
+        const state = {
+            activeTab: 'vessels',
+            vesselId: 'halo_jar',
+            terrainStyle: 'canyon', // 'canyon' | 'left_cliff' | 'right_peak' | 'island' | 'flat'
+            waterLevel: 0,          // 0% (Dry Terrarium) to 58% (Deep Aquascape)
+            waterTint: 'turquoise', // 'turquoise' | 'emerald' | 'amber'
+            substrates: [
+                { id: 'sub-1', type: 'pebbles', thickness: 28, color: '#78716c', wave: 4 },
+                { id: 'sub-2', type: 'charcoal', thickness: 16, color: '#1c1917', wave: 3 },
+                { id: 'sub-3', type: 'soil', thickness: 38, color: '#3b281e', wave: 8 },
+                { id: 'sub-4', type: 'moss', thickness: 26, color: '#4d7c0f', wave: 14 }
+            ],
+            items: [],
+            fauna: [], // Autonomous live creatures
+            foodParticles: [],
+            bubbles: [],
+            selectedItemId: null,
+            ambient: {
+                isNight: true, // Default to dramatic darkroom halo spotlight (like Reference 1)
+                fairyLights: false,
+                fireflies: true,
+                environment: 'darkroom', // 'darkroom' | 'conservatory' | 'study'
+                lightIntensity: 88,
+                mistBoost: 0
+            },
+            drag: {
+                active: false,
+                itemId: null,
+                offsetX: 0,
+                offsetY: 0
+            }
+        };
+
+        let nextItemUid = 100;
+        let nextFaunaUid = 500;
+
+        function switchTab(tabId) {
+            state.activeTab = tabId;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn flex flex-col items-center py-2 px-0.5 rounded-xl text-[11px] font-semibold transition text-botanical-600 hover:bg-white/60 relative';
+            });
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = 'tab-btn flex flex-col items-center py-2 px-0.5 rounded-xl text-[11px] font-semibold transition bg-white text-botanical-800 shadow-sm border border-botanical-200/80 relative';
+            }
+            renderSidebar();
+        }
+
+        function renderSidebar() {
+            const container = document.getElementById('sidebar-content');
+            if (!container) return;
+
+            if (state.activeTab === 'vessels') {
+                container.innerHTML = `
+                    <div>
+                        <h2 class="font-display font-bold text-base text-botanical-900">Glass Vessel & Lamp Architecture</h2>
+                        <p class="text-xs text-botanical-600 mt-0.5">Select from Wabi-Kusa halo jars, lagoon bowls, or frameless nature aquarium cubes.</p>
+                    </div>
+                    <div class="grid grid-cols-1 gap-2.5">
+                        ${Object.values(VESSELS).map(v => {
+                            const active = state.vesselId === v.id;
+                            return `
+                                <button onclick="selectVessel('${v.id}')" class="w-full text-left p-3 rounded-2xl border transition flex items-start gap-3 ${active ? 'bg-botanical-50 border-botanical-500 ring-2 ring-botanical-500/20 shadow-sm' : 'bg-white hover:bg-botanical-50/50 border-botanical-200'}">
+                                    <div class="w-12 h-12 rounded-xl bg-botanical-900 flex items-center justify-center shrink-0 border border-botanical-300">
+                                        <svg viewBox="0 0 600 650" class="w-10 h-10">
+                                            <path d="${v.clipPath}" fill="rgba(132,204,22,0.28)" stroke="#a3e635" stroke-width="26"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between gap-1">
+                                            <span class="font-bold text-xs sm:text-sm text-botanical-900 truncate">${v.name}</span>
+                                            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">+${v.humidityRetention}%</span>
+                                        </div>
+                                        <p class="text-[11px] text-botanical-600 mt-1 leading-relaxed">${v.desc}</p>
+                                    </div>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else if (state.activeTab === 'substrate') {
+                container.innerHTML = `
+                    <div>
+                        <h2 class="font-display font-bold text-base text-botanical-900">Terrain Relief, Water & Layers</h2>
+                        <p class="text-xs text-botanical-600">Sculpt mossy mountain cliffs, paludarium water levels, and substrate strata.</p>
+                    </div>
+
+                    <!-- Sculpted Mossy Mountain Relief Selector -->
+                    <div class="p-3 rounded-2xl bg-botanical-50 border border-botanical-200 space-y-2">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-botanical-700 block">Mossy Canyon Relief Style</span>
+                        <div class="grid grid-cols-3 gap-1.5">
+                            ${[
+                                ['canyon', 'Twin Canyon'],
+                                ['left_cliff', 'Left Cliff'],
+                                ['right_peak', 'Right Peak'],
+                                ['island', 'Center Island'],
+                                ['flat', 'Flat Floor']
+                            ].map(([id, label]) => `
+                                <button onclick="setTerrainStyle('${id}')" class="py-1.5 px-2 rounded-xl text-xs font-semibold border transition ${state.terrainStyle === id ? 'bg-botanical-700 text-white border-botanical-700 shadow-sm' : 'bg-white text-botanical-700 border-botanical-200 hover:bg-botanical-100'}">${label}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Paludarium / Aquarium Water Level Control -->
+                    <div class="p-3 rounded-2xl bg-cyan-50/70 border border-cyan-200 space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-cyan-900 flex items-center gap-1.5">
+                                <i class="ph-fill ph-waves text-cyan-600 text-sm"></i>
+                                <span>Aquatic Water Level</span>
+                            </span>
+                            <span class="text-xs font-bold text-cyan-800">${state.waterLevel === 0 ? 'Dry Terrarium' : state.waterLevel + '% Depth'}</span>
+                        </div>
+                        <input type="range" min="0" max="58" value="${state.waterLevel}" oninput="updateWaterLevel(this.value)" class="w-full" />
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="text-[11px] text-cyan-800 font-medium">Water Tint:</span>
+                            <div class="flex gap-1.5">
+                                <button onclick="setWaterTint('turquoise')" class="px-2 py-1 rounded-lg text-[11px] font-semibold border ${state.waterTint === 'turquoise' ? 'bg-cyan-600 text-white border-cyan-700' : 'bg-white text-cyan-800 border-cyan-200'}">Turquoise Lagoon</button>
+                                <button onclick="setWaterTint('emerald')" class="px-2 py-1 rounded-lg text-[11px] font-semibold border ${state.waterTint === 'emerald' ? 'bg-emerald-600 text-white border-emerald-700' : 'bg-white text-emerald-800 border-emerald-200'}">Nature Emerald</button>
+                                <button onclick="setWaterTint('amber')" class="px-2 py-1 rounded-lg text-[11px] font-semibold border ${state.waterTint === 'amber' ? 'bg-amber-600 text-white border-amber-700' : 'bg-white text-amber-800 border-amber-200'}">Blackwater</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Layer Quick Buttons -->
+                    <div class="p-3 rounded-2xl bg-botanical-50 border border-botanical-200">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-botanical-600 block mb-2">Add Substrate Layer (+ Top)</span>
+                        <div class="flex flex-wrap gap-1.5">
+                            ${Object.entries(SUBSTRATE_CATALOG).map(([key, info]) => `
+                                <button onclick="addSubstrateLayer('${key}')" class="px-2.5 py-1 rounded-xl bg-white hover:bg-botanical-100 text-botanical-800 border border-botanical-200 text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+                                    <span class="w-2.5 h-2.5 rounded-full" style="background:${info.defaultColor}"></span>
+                                    <span>+ ${info.name.split(' ')[0]}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Active Layers List -->
+                    <div class="space-y-2">
+                        ${[...state.substrates].reverse().map((layer, revIdx) => {
+                            const actualIdx = state.substrates.length - 1 - revIdx;
+                            const cat = SUBSTRATE_CATALOG[layer.type];
+                            return `
+                                <div class="p-3 rounded-2xl bg-white border border-botanical-200 shadow-sm space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-4 h-4 rounded-md border border-black/10" style="background:${layer.color}"></span>
+                                            <div>
+                                                <h4 class="text-xs font-bold text-botanical-900">${cat.name}</h4>
+                                                <span class="text-[10px] text-botanical-500 font-medium">${cat.role}</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <button onclick="moveSubstrateLayer(${actualIdx}, 1)" class="p-1 rounded hover:bg-botanical-100 text-botanical-600"><i class="ph-bold ph-caret-up text-xs"></i></button>
+                                            <button onclick="moveSubstrateLayer(${actualIdx}, -1)" class="p-1 rounded hover:bg-botanical-100 text-botanical-600"><i class="ph-bold ph-caret-down text-xs"></i></button>
+                                            <button onclick="removeSubstrateLayer(${actualIdx})" class="p-1 rounded hover:bg-rose-50 text-rose-500"><i class="ph-bold ph-trash text-xs"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-[11px] font-medium text-botanical-600 w-16">Depth: ${layer.thickness}</span>
+                                        <input type="range" min="10" max="80" value="${layer.thickness}" oninput="updateSubstrateThickness(${actualIdx}, this.value)" class="flex-1" />
+                                    </div>
+                                    <div class="flex items-center justify-between pt-0.5">
+                                        <span class="text-[11px] text-botanical-500">Color:</span>
+                                        <div class="flex items-center gap-1.5">
+                                            ${cat.swatches.map(hex => `
+                                                <button onclick="updateSubstrateColor(${actualIdx}, '${hex}')" class="w-4 h-4 rounded-full border ${layer.color === hex ? 'ring-2 ring-botanical-600 ring-offset-1' : 'border-black/15'}" style="background:${hex}"></button>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else if (state.activeTab === 'plants' || state.activeTab === 'decor') {
+                const isPlants = state.activeTab === 'plants';
+                const list = ITEM_CATALOG.filter(item => item.category === state.activeTab);
+                container.innerHTML = `
+                    <div>
+                        <h2 class="font-display font-bold text-base text-botanical-900">${isPlants ? 'Bonsai, Moss & Aquatic Flora' : 'Seiryu Stones, Bridges & Zen Architecture'}</h2>
+                        <p class="text-xs text-botanical-600 mt-0.5">Click any element to place it inside the glass, then drag to sculpt your scene.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        ${list.map(item => `
+                            <button onclick="addItemToTerrarium('${item.id}')" class="group p-2.5 rounded-2xl bg-white hover:bg-botanical-50/90 border border-botanical-200 hover:border-botanical-400 transition flex flex-col items-center text-center shadow-sm active:scale-95">
+                                <div class="w-20 h-20 rounded-xl bg-botanical-900/90 group-hover:bg-botanical-900 flex items-center justify-center overflow-visible transition mb-2 border border-botanical-200">
+                                    <svg viewBox="-85 -125 170 140" class="w-16 h-16 overflow-visible">
+                                        ${item.svg}
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-bold text-botanical-900 line-clamp-1">${item.name}</span>
+                                <span class="mt-0.5 text-[10px] text-botanical-500 font-medium">${isPlants ? 'Living Flora' : 'Wabi-Sabi Accent'}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (state.activeTab === 'fauna') {
+                container.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="font-display font-bold text-base text-botanical-900">Autonomous Live Fauna</h2>
+                            <p class="text-xs text-botanical-600">Self-moving fish, shrimp, frogs & butterflies with real-time behaviors.</p>
+                        </div>
+                        <button onclick="clearFauna()" class="px-2.5 py-1 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-semibold">Clear Fauna</button>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        ${Object.values(FAUNA_CATALOG).map(species => {
+                            const count = state.fauna.filter(f => f.type === species.id).length;
+                            return `
+                                <div class="p-3 rounded-2xl bg-white border border-botanical-200 shadow-sm flex items-center justify-between gap-3">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2">
+                                            <span class="font-bold text-xs sm:text-sm text-botanical-900">${species.name}</span>
+                                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">${count} Active</span>
+                                        </div>
+                                        <p class="text-[11px] text-botanical-600 mt-1 leading-relaxed">${species.desc}</p>
+                                    </div>
+                                    <div class="flex flex-col gap-1 shrink-0">
+                                        <button onclick="addFaunaGroup('${species.id}', 1)" class="px-3 py-1.5 rounded-xl bg-botanical-600 hover:bg-botanical-700 text-white text-xs font-bold transition shadow-sm">+ Add 1</button>
+                                        ${species.id === 'tetra' || species.id === 'shrimp' ? `
+                                            <button onclick="addFaunaGroup('${species.id}', 5)" class="px-2.5 py-1 rounded-xl bg-botanical-100 hover:bg-botanical-200 text-botanical-800 text-[11px] font-semibold transition">+ School (5)</button>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else if (state.activeTab === 'ambiance') {
+                container.innerHTML = `
+                    <div>
+                        <h2 class="font-display font-bold text-base text-botanical-900">Spotlight & Studio Mood</h2>
+                        <p class="text-xs text-botanical-600 mt-0.5">Control the overhead Halo LED cone, darkroom contrast, and fairy lights.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="p-3.5 rounded-2xl bg-white border border-botanical-200 space-y-2 shadow-sm">
+                            <div class="flex justify-between text-xs font-bold text-botanical-800">
+                                <span><i class="ph-fill ph-lightbulb-filament text-amber-500 mr-1"></i> Overhead Lamp Beam Intensity</span>
+                                <span id="ambient-light-val">${state.ambient.lightIntensity}%</span>
+                            </div>
+                            <input type="range" min="15" max="100" value="${state.ambient.lightIntensity}" oninput="updateLightIntensity(this.value)" class="w-full" />
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-white border border-botanical-200 space-y-3 shadow-sm">
+                            <label class="flex items-center justify-between cursor-pointer">
+                                <span class="text-xs font-bold text-botanical-800 flex items-center gap-2">
+                                    <i class="ph-fill ph-moon-stars text-indigo-600 text-base"></i>
+                                    <span>Dramatic Darkroom Halo Mode (Photo 1)</span>
+                                </span>
+                                <input type="checkbox" ${state.ambient.isNight ? 'checked' : ''} onchange="toggleNightMode()" class="w-4 h-4 accent-botanical-600 rounded" />
+                            </label>
+
+                            <label class="flex items-center justify-between cursor-pointer pt-2 border-t border-botanical-100">
+                                <span class="text-xs font-bold text-botanical-800 flex items-center gap-2">
+                                    <i class="ph-fill ph-sparkle text-amber-500 text-base"></i>
+                                    <span>Warm Copper String Lights</span>
+                                </span>
+                                <input type="checkbox" ${state.ambient.fairyLights ? 'checked' : ''} onchange="toggleFairyLights(this.checked)" class="w-4 h-4 accent-botanical-600 rounded" />
+                            </label>
+
+                            <label class="flex items-center justify-between cursor-pointer pt-2 border-t border-botanical-100">
+                                <span class="text-xs font-bold text-botanical-800 flex items-center gap-2">
+                                    <i class="ph-fill ph-shooting-star text-emerald-500 text-base"></i>
+                                    <span>Forest Spores & Oxygen Pearling</span>
+                                </span>
+                                <input type="checkbox" ${state.ambient.fireflies ? 'checked' : ''} onchange="toggleFireflies(this.checked)" class="w-4 h-4 accent-botanical-600 rounded" />
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function getTopSubstrateY() {
+            const vessel = VESSELS[state.vesselId];
+            const totalHeight = state.substrates.reduce((sum, s) => sum + Number(s.thickness), 0);
+            return Math.max(vessel.topY + 90, vessel.baseY - totalHeight);
+        }
+
+        function getWaterSurfaceY() {
+            const vessel = VESSELS[state.vesselId];
+            if (state.waterLevel <= 0) return vessel.baseY + 50;
+            const maxWaterSpan = (vessel.baseY - vessel.topY) * 0.72;
+            return Math.round(vessel.baseY - (state.waterLevel / 60) * maxWaterSpan);
+        }
+
+        function renderLampAndTerrain() {
+            const vessel = VESSELS[state.vesselId];
+            const lampLayer = document.getElementById('lamp-hardware-layer');
+            const cone = document.getElementById('lamp-light-cone');
+            const standLayer = document.getElementById('vessel-stand-layer');
+
+            standLayer.innerHTML = vessel.standSvg || '';
+
+            // Overhead Lamp Hardware based on Vessel type
+            const beamOpacity = (state.ambient.lightIntensity / 100) * (state.ambient.isNight ? 0.95 : 0.45);
+            cone.setAttribute('opacity', beamOpacity.toFixed(2));
+
+            if (vessel.lampType === 'gooseneck') {
+                // Sleek cylindrical spotlight on stem (Reference 1)
+                lampLayer.innerHTML = `
+                    <path d="M 300 165 L 300 58" stroke="#18181b" stroke-width="6" stroke-linecap="round" />
+                    <g transform="translate(300, 42) rotate(-6)">
+                        <rect x="-18" y="-26" width="36" height="44" rx="6" fill="#090d16" stroke="#3f3f46" stroke-width="2" />
+                        <ellipse cx="0" cy="18" rx="16" ry="5" fill="#fefce8" />
+                        <ellipse cx="0" cy="18" rx="22" ry="9" fill="url(#fairy-glow)" />
+                    </g>
+                `;
+                cone.setAttribute('points', `282,62 318,62 520,${vessel.baseY} 80,${vessel.baseY}`);
+            } else if (vessel.lampType === 'ring') {
+                // Circular Halo Lamp (Reference 2)
+                lampLayer.innerHTML = `
+                    <line x1="300" y1="135" x2="300" y2="55" stroke="#27272a" stroke-width="5" />
+                    <rect x="242" y="38" width="116" height="18" rx="9" fill="#18181b" stroke="#52525b" stroke-width="2" />
+                    <ellipse cx="300" cy="56" rx="46" ry="5" fill="#fef9c3" />
+                    <ellipse cx="300" cy="58" rx="62" ry="12" fill="url(#fairy-glow)" />
+                `;
+                cone.setAttribute('points', `254,56 346,56 500,${vessel.baseY} 100,${vessel.baseY}`);
+            } else if (vessel.lampType === 'linear' || vessel.lampType === 'linear_wide') {
+                // Sleek suspended aquarium LED bar (Reference 5)
+                const w = vessel.lampType === 'linear_wide' ? 420 : 340;
+                const x0 = 300 - w / 2;
+                lampLayer.innerHTML = `
+                    <line x1="${x0 + 20}" y1="135" x2="${x0 + 20}" y2="52" stroke="#52525b" stroke-width="3.5" />
+                    <line x1="${x0 + w - 20}" y1="135" x2="${x0 + w - 20}" y2="52" stroke="#52525b" stroke-width="3.5" />
+                    <rect x="${x0}" y="44" width="${w}" height="12" rx="4" fill="#18181b" stroke="#71717a" stroke-width="1.5" />
+                    <rect x="${x0 + 12}" y="55" width="${w - 24}" height="4" rx="2" fill="#fefce8" />
+                `;
+                cone.setAttribute('points', `${x0 + 15},58 ${x0 + w - 15},58 540,${vessel.baseY} 60,${vessel.baseY}`);
+            } else {
+                lampLayer.innerHTML = '';
+                cone.setAttribute('points', `220,100 380,100 520,${vessel.baseY} 80,${vessel.baseY}`);
+            }
+
+            // Sculpted Background Mossy Cliffs / Canyon Relief
+            const reliefLayer = document.getElementById('terrain-relief-layer');
+            const topSubY = getTopSubstrateY();
+
+            if (state.terrainStyle === 'canyon') {
+                // Twin lush mossy canyon walls with central valley (Reference 1 & 4)
+                reliefLayer.innerHTML = `
+                    <!-- Left Canyon Crag & Moss Wall -->
+                    <path d="M 70 ${topSubY + 20} L 70 ${topSubY - 190} Q 155 ${topSubY - 175}, 205 ${topSubY - 95} Q 245 ${topSubY - 25}, 275 ${topSubY + 12} Z" fill="#1b4332" />
+                    <path d="M 85 ${topSubY + 15} C 95 ${topSubY - 140}, 165 ${topSubY - 150}, 215 ${topSubY - 65} L 265 ${topSubY + 15} Z" fill="#3f6212" />
+                    <path d="M 110 ${topSubY} C 130 ${topSubY - 105}, 185 ${topSubY - 110}, 235 ${topSubY - 20} Z" fill="#65a30d" opacity="0.7" />
+                    <!-- Right Canyon Crag & Moss Wall -->
+                    <path d="M 530 ${topSubY + 20} L 530 ${topSubY - 205} Q 435 ${topSubY - 185}, 390 ${topSubY - 105} Q 350 ${topSubY - 25}, 320 ${topSubY + 12} Z" fill="#14532d" />
+                    <path d="M 515 ${topSubY + 15} C 495 ${topSubY - 155}, 425 ${topSubY - 160}, 375 ${topSubY - 75} L 330 ${topSubY + 15} Z" fill="#4d7c0f" />
+                    <path d="M 490 ${topSubY} C 460 ${topSubY - 115}, 410 ${topSubY - 110}, 355 ${topSubY - 15} Z" fill="#84cc16" opacity="0.65" />
+                `;
+            } else if (state.terrainStyle === 'left_cliff') {
+                reliefLayer.innerHTML = `
+                    <path d="M 65 ${topSubY + 25} L 65 ${topSubY - 210} C 195 ${topSubY - 200}, 295 ${topSubY - 130}, 385 ${topSubY + 15} Z" fill="#2d6a4f" />
+                    <path d="M 75 ${topSubY + 15} C 165 ${topSubY - 165}, 265 ${topSubY - 115}, 355 ${topSubY + 15} Z" fill="#4d7c0f" />
+                    <path d="M 95 ${topSubY + 5} C 165 ${topSubY - 120}, 240 ${topSubY - 85}, 315 ${topSubY + 10} Z" fill="#65a30d" opacity="0.8" />
+                `;
+            } else if (state.terrainStyle === 'right_peak') {
+                reliefLayer.innerHTML = `
+                    <path d="M 535 ${topSubY + 25} L 535 ${topSubY - 210} C 405 ${topSubY - 200}, 305 ${topSubY - 130}, 215 ${topSubY + 15} Z" fill="#2d6a4f" />
+                    <path d="M 525 ${topSubY + 15} C 435 ${topSubY - 165}, 335 ${topSubY - 115}, 245 ${topSubY + 15} Z" fill="#4d7c0f" />
+                `;
+            } else if (state.terrainStyle === 'island') {
+                reliefLayer.innerHTML = `
+                    <path d="M 110 ${topSubY + 20} C 155 ${topSubY - 165}, 445 ${topSubY - 165}, 490 ${topSubY + 20} Z" fill="#365314" />
+                    <path d="M 140 ${topSubY + 15} C 185 ${topSubY - 130}, 415 ${topSubY - 130}, 460 ${topSubY + 15} Z" fill="#4d7c0f" />
+                    <path d="M 175 ${topSubY + 5} C 215 ${topSubY - 95}, 385 ${topSubY - 95}, 425 ${topSubY + 5} Z" fill="#65a30d" opacity="0.85" />
+                `;
+            } else {
+                reliefLayer.innerHTML = '';
+            }
+        }
+
+        function renderWaterBody() {
+            const waterLayer = document.getElementById('water-body-layer');
+            const vessel = VESSELS[state.vesselId];
+            if (state.waterLevel <= 0) {
+                waterLayer.innerHTML = '';
+                return;
+            }
+
+            const waterY = getWaterSurfaceY();
+            const gradId = state.waterTint === 'turquoise'
+                ? 'water-turquoise-grad'
+                : state.waterTint === 'emerald'
+                    ? 'water-emerald-grad'
+                    : 'water-amber-grad';
+
+            const surfaceStroke = state.waterTint === 'turquoise'
+                ? 'rgba(165, 243, 252, 0.85)'
+                : state.waterTint === 'emerald'
+                    ? 'rgba(167, 243, 208, 0.75)'
+                    : 'rgba(253, 230, 138, 0.7)';
+
+            waterLayer.innerHTML = `
+                <!-- Main Submerged Water Volume -->
+                <rect x="40" y="${waterY}" width="520" height="${vessel.baseY - waterY + 30}" fill="url(#${gradId})" />
+                <!-- Meniscus Surface Shimmer Wave -->
+                <path d="M 40 ${waterY} Q 170 ${waterY - 4}, 300 ${waterY} T 560 ${waterY}" fill="none" stroke="${surfaceStroke}" stroke-width="3" class="water-surface-shimmer" />
+                <ellipse cx="300" cy="${waterY}" rx="220" ry="5" fill="rgba(255,255,255,0.16)" class="water-surface-shimmer" />
+            `;
+        }
+
+        function renderVesselAndSubstrates() {
+            const vessel = VESSELS[state.vesselId];
+            document.getElementById('vessel-clip-path').setAttribute('d', vessel.clipPath);
+            document.getElementById('vessel-back-path').setAttribute('d', vessel.clipPath);
+            document.getElementById('vessel-front-glass').innerHTML = vessel.frontGlass;
+
+            renderLampAndTerrain();
+
+            // Render substrate layers bottom-up inside clipped vessel
+            const subGroup = document.getElementById('substrate-group');
+            let currentBottomY = vessel.baseY;
+            let svgHtml = '';
+
+            state.substrates.forEach((layer, idx) => {
+                const h = Number(layer.thickness);
+                const topY = currentBottomY - h;
+                const w = layer.wave || 6;
+
+                // Valley dip in center if canyon relief is active
+                const centerDip = state.terrainStyle === 'canyon' && idx === state.substrates.length - 1 ? 18 : (idx % 2 === 0 ? w : -w);
+
+                const pathD = `
+                    M 40 ${topY - (state.terrainStyle === 'canyon' ? 12 : 0)}
+                    Q 180 ${topY - w}, 300 ${topY + centerDip}
+                    T 560 ${topY - (state.terrainStyle === 'canyon' ? 12 : 0)}
+                    L 560 ${currentBottomY + 25}
+                    L 40 ${currentBottomY + 25}
+                    Z
+                `;
+
+                let details = '';
+                const seedBase = (idx + 1) * 97;
+                if (layer.type === 'pebbles') {
+                    for (let i = 0; i < 30; i++) {
+                        const px = 85 + ((seedBase * (i + 3)) % 430);
+                        const py = topY + 7 + ((seedBase * (i + 7)) % Math.max(8, h - 9));
+                        const rx = 5 + (i % 6);
+                        const ry = 3.5 + (i % 4);
+                        const shade = i % 2 === 0 ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.22)';
+                        details += `<ellipse cx="${px}" cy="${py}" rx="${rx}" ry="${ry}" fill="${shade}" />`;
+                    }
+                } else if (layer.type === 'charcoal') {
+                    for (let i = 0; i < 32; i++) {
+                        const px = 90 + ((seedBase * (i + 5)) % 420);
+                        const py = topY + 4 + ((seedBase * (i + 11)) % Math.max(6, h - 6));
+                        details += `<circle cx="${px}" cy="${py}" r="${1.8 + (i % 2)}" fill="rgba(255,255,255,0.12)" />`;
+                    }
+                } else if (layer.type === 'soil' || layer.type === 'sand') {
+                    for (let i = 0; i < 40; i++) {
+                        const px = 80 + ((seedBase * (i + 13)) % 440);
+                        const py = topY + 5 + ((seedBase * (i + 17)) % Math.max(6, h - 8));
+                        details += `<circle cx="${px}" cy="${py}" r="${1.3 + (i % 2)}" fill="${i % 2 === 0 ? 'rgba(0,0,0,0.18)' : 'rgba(255,255,255,0.16)'}" />`;
+                    }
+                } else if (layer.type === 'moss') {
+                    for (let i = 0; i < 16; i++) {
+                        const mx = 85 + i * 28;
+                        const my = topY + (state.terrainStyle === 'canyon' && i > 5 && i < 10 ? 12 : 2);
+                        details += `<ellipse cx="${mx}" cy="${my}" rx="24" ry="11" fill="${layer.color}" />`;
+                        details += `<ellipse cx="${mx - 4}" cy="${my - 3}" rx="14" ry="6" fill="#a3e635" opacity="0.35" />`;
+                    }
+                }
+
+                svgHtml += `
+                    <g>
+                        <path d="${pathD}" fill="${layer.color}" />
+                        ${details}
+                    </g>
+                `;
+                currentBottomY = topY;
+            });
+
+            subGroup.innerHTML = svgHtml;
+            renderWaterBody();
+        }
+
+        function addFaunaGroup(speciesId, count = 1) {
+            const vessel = VESSELS[state.vesselId];
+            const topSubY = getTopSubstrateY();
+
+            // If user adds aquatic fish/shrimp while water is 0%, automatically raise water level so they can swim!
+            if ((speciesId === 'tetra' || speciesId === 'koi' || speciesId === 'shrimp') && state.waterLevel < 24) {
+                state.waterLevel = speciesId === 'tetra' ? 42 : 28;
+                renderVesselAndSubstrates();
+            }
+
+            const waterY = getWaterSurfaceY();
+
+            for (let i = 0; i < count; i++) {
+                let x = 180 + Math.random() * 240;
+                let y = topSubY - 20;
+                let vx = (Math.random() > 0.5 ? 1 : -1) * (0.65 + Math.random() * 0.55);
+                let vy = (Math.random() - 0.5) * 0.25;
+
+                if (speciesId === 'tetra' || speciesId === 'koi') {
+                    y = waterY + 22 + Math.random() * Math.max(25, (vessel.baseY - waterY - 45));
+                } else if (speciesId === 'shrimp') {
+                    y = topSubY - 4 - Math.random() * 14;
+                    vx *= 0.45;
+                } else if (speciesId === 'frog') {
+                    y = topSubY - 2 - Math.random() * 18;
+                    vx = 0;
+                    vy = 0;
+                } else if (speciesId === 'butterfly') {
+                    y = vessel.topY + 65 + Math.random() * 140;
+                    vx *= 0.85;
+                } else if (speciesId === 'ladybug') {
+                    y = topSubY - 10 - Math.random() * 45;
+                    vx *= 0.25;
+                }
+
+                state.fauna.push({
+                    uid: ++nextFaunaUid,
+                    type: speciesId,
+                    x,
+                    y,
+                    vx,
+                    vy,
+                    facing: vx >= 0 ? 1 : -1,
+                    phase: Math.random() * Math.PI * 2,
+                    scale: 0.85 + Math.random() * 0.25,
+                    timer: Math.floor(Math.random() * 140),
+                    hopStartX: x,
+                    hopStartY: y,
+                    hopTargetX: x,
+                    hopTargetY: y,
+                    hopProgress: 1,
+                    perched: false
+                });
+            }
+
+            SoundFX.playPop(540);
+            if (state.activeTab === 'fauna' || state.activeTab === 'substrate') renderSidebar();
+            evaluateEcosystem();
+        }
+
+        function clearFauna() {
+            state.fauna = [];
+            SoundFX.playPop(280);
+            renderSidebar();
+            evaluateEcosystem();
+        }
+
+        function feedFauna() {
+            SoundFX.playPop(620);
+            const vessel = VESSELS[state.vesselId];
+            const startY = state.waterLevel > 0 ? getWaterSurfaceY() + 4 : vessel.topY + 40;
+            for (let i = 0; i < 10; i++) {
+                state.foodParticles.push({
+                    x: 200 + Math.random() * 200,
+                    y: startY + Math.random() * 12,
+                    vy: 0.35 + Math.random() * 0.25,
+                    life: 260
+                });
+            }
+        }
+
+        function renderFaunaFrame(now) {
+            const frontEl = document.getElementById('fauna-front-layer');
+            const backEl = document.getElementById('fauna-back-layer');
+            if (!frontEl || !backEl) return;
+
+            const vessel = VESSELS[state.vesselId];
+            const topSubY = getTopSubstrateY();
+            const waterY = getWaterSurfaceY();
+            const minX = vessel.minX + 28;
+            const maxX = vessel.maxX - 28;
+
+            let frontHtml = '';
+            let backHtml = '';
+
+            // Update & Render Food Pellets
+            for (let i = state.foodParticles.length - 1; i >= 0; i--) {
+                const fp = state.foodParticles[i];
+                fp.y += fp.vy;
+                fp.life--;
+                if (fp.y > topSubY || fp.life <= 0) {
+                    state.foodParticles.splice(i, 1);
+                } else {
+                    frontHtml += `<circle cx="${fp.x.toFixed(1)}" cy="${fp.y.toFixed(1)}" r="2.5" fill="#d97706" stroke="#fef08a" stroke-width="0.6" />`;
+                }
+            }
+
+            // Update & Render Each Live Creature
+            state.fauna.forEach((f, idx) => {
+                f.phase += 0.14;
+                f.timer++;
+
+                if (f.type === 'tetra' || f.type === 'koi') {
+                    const swimTop = state.waterLevel > 0 ? waterY + 16 : vessel.topY + 90;
+                    const swimBot = Math.max(swimTop + 30, topSubY - 12);
+
+                    // Seek food if nearby
+                    if (state.foodParticles.length > 0) {
+                        const target = state.foodParticles[idx % state.foodParticles.length];
+                        const dx = target.x - f.x;
+                        const dy = target.y - f.y;
+                        const dist = Math.hypot(dx, dy);
+                        if (dist < 160 && dist > 4) {
+                            f.vx += (dx / dist) * 0.08;
+                            f.vy += (dy / dist) * 0.08;
+                        }
+                        if (dist < 10) target.life = 0;
+                    } else {
+                        // Gentle schooling wave motion
+                        f.vy += Math.sin(f.phase * 0.4 + idx) * 0.015;
+                        if (Math.random() < 0.012) f.vx += (Math.random() - 0.5) * 0.5;
+                    }
+
+                    // Clamp velocity
+                    const maxSpeed = f.type === 'tetra' ? 1.45 : 1.05;
+                    f.vx = Math.max(-maxSpeed, Math.min(maxSpeed, f.vx));
+                    f.vy = Math.max(-0.55, Math.min(0.55, f.vy));
+                    if (Math.abs(f.vx) < 0.35) f.vx = f.facing * 0.55;
+
+                    f.x += f.vx;
+                    f.y += f.vy;
+
+                    if (f.x < minX) { f.x = minX; f.vx = Math.abs(f.vx); }
+                    if (f.x > maxX) { f.x = maxX; f.vx = -Math.abs(f.vx); }
+                    if (f.y < swimTop) { f.y = swimTop; f.vy = Math.abs(f.vy) * 0.6; }
+                    if (f.y > swimBot) { f.y = swimBot; f.vy = -Math.abs(f.vy) * 0.6; }
+
+                    f.facing = f.vx >= 0 ? 1 : -1;
+                    const tailWag = Math.sin(f.phase * 1.9) * 4;
+                    const pitch = f.vy * 14 * f.facing;
+
+                    if (f.type === 'tetra') {
+                        const svgFish = `
+                            <g transform="translate(${f.x.toFixed(1)}, ${f.y.toFixed(1)}) rotate(${pitch.toFixed(1)}) scale(${(f.facing * f.scale).toFixed(2)}, ${f.scale.toFixed(2)})" onclick="scareFauna(${f.uid})" class="cursor-pointer">
+                                <!-- Tail Fin -->
+                                <polygon points="-9,0 -16,${(-5 + tailWag * 0.4).toFixed(1)} -14,0 -16,${(5 + tailWag * 0.4).toFixed(1)}" fill="rgba(255,255,255,0.65)" />
+                                <!-- Crimson Lower Rear Stripe -->
+                                <path d="M-10,0 Q-2,5 6,1 L8,0 L-10,0 Z" fill="#ef4444" />
+                                <!-- Electric Neon Cyan-Blue Upper Stripe -->
+                                <path d="M-9,-1 Q0,-5 10,-1 Q2,-1 -9,-1 Z" fill="#00f5d4" stroke="#38bdf8" stroke-width="0.8" />
+                                <!-- Eye -->
+                                <circle cx="7.5" cy="-1" r="1.6" fill="#ffffff" />
+                                <circle cx="8" cy="-1" r="0.9" fill="#090d16" />
+                            </g>
+                        `;
+                        if (idx % 3 === 0) backHtml += svgFish;
+                        else frontHtml += svgFish;
+                    } else {
+                        // Golden Medaka / Mini Koi
+                        frontHtml += `
+                            <g transform="translate(${f.x.toFixed(1)}, ${f.y.toFixed(1)}) rotate(${pitch.toFixed(1)}) scale(${(f.facing * f.scale * 1.2).toFixed(2)}, ${(f.scale * 1.2).toFixed(2)})" onclick="scareFauna(${f.uid})" class="cursor-pointer">
+                                <polygon points="-11,0 -19,${(-6 + tailWag * 0.5).toFixed(1)} -16,0 -19,${(6 + tailWag * 0.5).toFixed(1)}" fill="#fed7aa" opacity="0.85" />
+                                <ellipse cx="0" cy="0" rx="11" ry="4" fill="#f97316" />
+                                <ellipse cx="2" cy="-1" rx="6" ry="2.2" fill="#fef08a" />
+                                <circle cx="-3" cy="0" r="2.2" fill="#ef4444" />
+                                <circle cx="8" cy="-1" r="1.4" fill="#111827" />
+                            </g>
+                        `;
+                    }
+                } else if (f.type === 'shrimp') {
+                    // Red Cherry Shrimp grazing along substrate contour
+                    f.x += f.vx;
+                    if (f.x < minX + 15) { f.x = minX + 15; f.vx = Math.abs(f.vx); }
+                    if (f.x > maxX - 15) { f.x = maxX - 15; f.vx = -Math.abs(f.vx); }
+                    if (Math.random() < 0.015) f.vx = -f.vx;
+                    f.facing = f.vx >= 0 ? 1 : -1;
+
+                    // Occasional darting hop
+                    const bobY = Math.abs(Math.sin(f.phase * 0.5)) * -3;
+                    const sy = topSubY - 4 + bobY;
+                    const feelerWave = Math.sin(f.phase * 1.5) * 4;
+
+                    frontHtml += `
+                        <g transform="translate(${f.x.toFixed(1)}, ${sy.toFixed(1)}) scale(${(f.facing * f.scale).toFixed(2)}, ${f.scale.toFixed(2)})" onclick="scareFauna(${f.uid})" class="cursor-pointer">
+                            <!-- Curved Crimson Carapace & Tail -->
+                            <path d="M-9,2 Q-4,-5 5,-3 Q9,-2 11,1 Q4,2 -9,2 Z" fill="#dc2626" stroke="#f87171" stroke-width="0.6" />
+                            <polygon points="-9,2 -13,0 -12,4" fill="#ef4444" />
+                            <!-- Animated Grazing Legs -->
+                            <line x1="-2" y1="2" x2="${(-3 + Math.sin(f.phase * 2) * 1.5).toFixed(1)}" y2="5.5" stroke="#fca5a5" stroke-width="0.9" />
+                            <line x1="2" y1="2" x2="${(2 - Math.sin(f.phase * 2) * 1.5).toFixed(1)}" y2="5.5" stroke="#fca5a5" stroke-width="0.9" />
+                            <line x1="6" y1="2" x2="${(6 + Math.sin(f.phase * 2) * 1.5).toFixed(1)}" y2="5.5" stroke="#fca5a5" stroke-width="0.9" />
+                            <!-- Long White Antennae -->
+                            <path d="M 10,-1 Q 18,${(-6 + feelerWave).toFixed(1)} 23,${(-4 + feelerWave).toFixed(1)}" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="0.7" />
+                            <circle cx="9" cy="-1.2" r="1" fill="#111" />
+                        </g>
+                    `;
+                } else if (f.type === 'frog') {
+                    // Breathing vocal sac + periodic parabolic hops across moss pads
+                    if (f.hopProgress < 1) {
+                        f.hopProgress = Math.min(1, f.hopProgress + 0.045);
+                        const t = f.hopProgress;
+                        f.x = f.hopStartX + (f.hopTargetX - f.hopStartX) * t;
+                        const linearY = f.hopStartY + (f.hopTargetY - f.hopStartY) * t;
+                        const arcHeight = -48 * 4 * t * (1 - t);
+                        f.y = linearY + arcHeight;
+                    } else if (f.timer > 190 && Math.random() < 0.025) {
+                        f.timer = 0;
+                        f.hopStartX = f.x;
+                        f.hopStartY = f.y;
+                        f.hopTargetX = Math.max(minX + 30, Math.min(maxX - 30, f.x + (Math.random() - 0.5) * 130));
+                        f.hopTargetY = topSubY - 4 - Math.random() * 24;
+                        f.facing = f.hopTargetX >= f.x ? 1 : -1;
+                        f.hopProgress = 0;
+                    }
+
+                    const throatScale = 1 + Math.sin(f.phase * 0.9) * 0.22;
+                    const isBlinking = (f.timer % 130) > 122;
+
+                    frontHtml += `
+                        <g transform="translate(${f.x.toFixed(1)}, ${f.y.toFixed(1)}) scale(${(f.facing * f.scale).toFixed(2)}, ${f.scale.toFixed(2)})" onclick="scareFauna(${f.uid})" class="cursor-pointer">
+                            <ellipse cx="0" cy="2" rx="12" ry="3" fill="rgba(0,0,0,0.25)" />
+                            <!-- Frog Body -->
+                            <ellipse cx="0" cy="-7" rx="11" ry="8" fill="#65a30d" stroke="#365314" stroke-width="1.2" />
+                            <!-- Pulsing Vocal Throat -->
+                            <ellipse cx="5" cy="-5" rx="${(4.5 * throatScale).toFixed(1)}" ry="${(3.5 * throatScale).toFixed(1)}" fill="#ecfccb" />
+                            <!-- Ruby Eye -->
+                            <circle cx="5" cy="-13" r="3.5" fill="#84cc16" stroke="#365314" stroke-width="1" />
+                            ${isBlinking
+                                ? `<line x1="3" y1="-13" x2="7" y2="-13" stroke="#365314" stroke-width="1.5" />`
+                                : `<circle cx="5.5" cy="-13" r="2" fill="#ef4444" /><circle cx="6" cy="-13" r="0.9" fill="#111" />`
+                            }
+                            <!-- Hind Leg -->
+                            <path d="M-8,-3 Q-13,-9 -5,-1" fill="none" stroke="#4d7c0f" stroke-width="2.5" stroke-linecap="round" />
+                        </g>
+                    `;
+                } else if (f.type === 'butterfly') {
+                    // Flutters around upper canopy
+                    const airTop = vessel.topY + 45;
+                    const airBot = Math.max(airTop + 60, topSubY - 55);
+
+                    f.x += f.vx;
+                    f.y += f.vy + Math.sin(f.phase * 0.7) * 0.45;
+
+                    if (f.x < minX + 20) { f.x = minX + 20; f.vx = Math.abs(f.vx); }
+                    if (f.x > maxX - 20) { f.x = maxX - 20; f.vx = -Math.abs(f.vx); }
+                    if (f.y < airTop) { f.y = airTop; f.vy = Math.abs(f.vy); }
+                    if (f.y > airBot) { f.y = airBot; f.vy = -Math.abs(f.vy); }
+
+                    f.facing = f.vx >= 0 ? 1 : -1;
+                    const wingFlap = Math.abs(Math.cos(f.phase * 1.8));
+
+                    frontHtml += `
+                        <g transform="translate(${f.x.toFixed(1)}, ${f.y.toFixed(1)}) scale(${(f.facing * f.scale).toFixed(2)}, ${f.scale.toFixed(2)})" onclick="scareFauna(${f.uid})" class="cursor-pointer">
+                            <g transform="scale(1, ${wingFlap.toFixed(2)})">
+                                <path d="M0,0 C-12,-16 -22,-8 -10,2 Z" fill="#38bdf8" stroke="#1e3a8a" stroke-width="1" />
+                                <path d="M0,0 C10,-18 20,-10 8,2 Z" fill="#60a5fa" stroke="#1e3a8a" stroke-width="1" />
+                                <circle cx="-8" cy="-6" r="1.5" fill="#ffffff" opacity="0.8" />
+                                <circle cx="6" cy="-7" r="1.5" fill="#ffffff" opacity="0.8" />
+                            </g>
+                            <line x1="-3" y1="1" x2="4" y2="-1" stroke="#1e293b" stroke-width="1.8" stroke-linecap="round" />
+                        </g>
+                    `;
+                } else if (f.type === 'ladybug') {
+                    f.x += f.vx;
+                    if (f.x < minX + 35 || f.x > maxX - 35) f.vx = -f.vx;
+                    f.facing = f.vx >= 0 ? 1 : -1;
+                    const ly = topSubY - 12 + Math.sin(f.x * 0.05) * 6;
+
+                    frontHtml += `
+                        <g transform="translate(${f.x.toFixed(1)}, ${ly.toFixed(1)}) scale(${(f.facing * f.scale).toFixed(2)}, ${f.scale.toFixed(2)})">
+                            <ellipse cx="0" cy="-3" rx="6" ry="4.5" fill="#dc2626" stroke="#111827" stroke-width="1" />
+                            <circle cx="5" cy="-2.5" r="2.2" fill="#111827" />
+                            <circle cx="-2" cy="-4.5" r="1.1" fill="#111827" />
+                            <circle cx="1" cy="-3" r="1.1" fill="#111827" />
+                            <circle cx="-3" cy="-2" r="1" fill="#111827" />
+                        </g>
+                    `;
+                }
+            });
+
+            backEl.innerHTML = backHtml;
+            frontEl.innerHTML = frontHtml;
+        }
+
+        function scareFauna(uid) {
+            const f = state.fauna.find(item => item.uid === uid);
+            if (!f) return;
+            SoundFX.playPop(680);
+            if (f.type === 'frog') {
+                f.hopStartX = f.x;
+                f.hopStartY = f.y;
+                f.hopTargetX = Math.max(150, Math.min(450, f.x + (Math.random() > 0.5 ? 85 : -85)));
+                f.hopTargetY = getTopSubstrateY() - 8;
+                f.facing = f.hopTargetX >= f.x ? 1 : -1;
+                f.hopProgress = 0;
+            } else {
+                f.vx = -f.vx * 2.2;
+                f.vy = (Math.random() - 0.5) * 1.4;
+            }
+        }
+
+        function startAnimationLoop() {
+            function step(now) {
+                renderFaunaFrame(now);
+                requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        function setTerrainStyle(styleId) {
+            state.terrainStyle = styleId;
+            SoundFX.playPop(390);
+            renderSidebar();
+            renderVesselAndSubstrates();
+        }
+
+        function updateWaterLevel(val) {
+            state.waterLevel = Number(val);
+            renderWaterBody();
+            evaluateEcosystem();
+            if (state.activeTab === 'substrate') {
+                renderSidebar();
+            }
+        }
+
+        function setWaterTint(tint) {
+            state.waterTint = tint;
+            SoundFX.playPop(460);
+            renderWaterBody();
+            renderSidebar();
+        }
+
+        function selectVessel(vesselId) {
+            if (!VESSELS[vesselId]) return;
+            state.vesselId = vesselId;
+            SoundFX.playPop(360);
+            renderSidebar();
+            renderVesselAndSubstrates();
+            renderAmbientLayers();
+            renderPlacedItems();
+            evaluateEcosystem();
+        }
+
+        function addSubstrateLayer(type) {
+            const cat = SUBSTRATE_CATALOG[type];
+            if (!cat) return;
+            state.substrates.push({
+                id: 'sub-' + Date.now() + '-' + Math.floor(Math.random() * 100),
+                type,
+                thickness: 24,
+                color: cat.defaultColor,
+                wave: 6
+            });
+            SoundFX.playPop(410);
+            renderSidebar();
+            renderVesselAndSubstrates();
+            evaluateEcosystem();
+        }
+
+        function moveSubstrateLayer(idx, dir) {
+            const targetIdx = idx + dir;
+            if (targetIdx < 0 || targetIdx >= state.substrates.length) return;
+            const temp = state.substrates[idx];
+            state.substrates[idx] = state.substrates[targetIdx];
+            state.substrates[targetIdx] = temp;
+            SoundFX.playPop(440);
+            renderSidebar();
+            renderVesselAndSubstrates();
+            evaluateEcosystem();
+        }
+
+        function removeSubstrateLayer(idx) {
+            if (state.substrates.length <= 1) return;
+            state.substrates.splice(idx, 1);
+            SoundFX.playPop(300);
+            renderSidebar();
+            renderVesselAndSubstrates();
+            evaluateEcosystem();
+        }
+
+        function updateSubstrateThickness(idx, val) {
+            if (!state.substrates[idx]) return;
+            state.substrates[idx].thickness = Number(val);
+            renderVesselAndSubstrates();
+            evaluateEcosystem();
+            if (state.activeTab === 'substrate') renderSidebar();
+        }
+
+        function updateSubstrateColor(idx, hex) {
+            if (!state.substrates[idx]) return;
+            state.substrates[idx].color = hex;
+            SoundFX.playPop(480);
+            renderVesselAndSubstrates();
+            renderSidebar();
+        }
+
+        function renderAmbientLayers() {
+            const fairyLayer = document.getElementById('fairy-lights-layer');
+            const firefliesLayer = document.getElementById('fireflies-layer');
+            const vessel = VESSELS[state.vesselId];
+
+            if (fairyLayer) {
+                if (state.ambient.fairyLights) {
+                    const y1 = vessel.topY + 35;
+                    const y2 = vessel.topY + 95;
+                    let bulbs = '';
+                    const pts = [
+                        [165, y1 + 10], [210, y1 + 32], [255, y1 + 44], [300, y1 + 48],
+                        [345, y1 + 44], [390, y1 + 32], [435, y1 + 10],
+                        [190, y2 + 15], [245, y2 + 36], [300, y2 + 42], [355, y2 + 36], [410, y2 + 15]
+                    ];
+                    pts.forEach(([bx, by], i) => {
+                        const delay = (i * 0.25).toFixed(2);
+                        bulbs += `
+                            <g class="fairy-bulb" style="animation-delay:${delay}s">
+                                <circle cx="${bx}" cy="${by}" r="14" fill="url(#fairy-glow)" />
+                                <circle cx="${bx}" cy="${by}" r="3.2" fill="#fffbeb" />
+                            </g>
+                        `;
+                    });
+                    fairyLayer.innerHTML = `
+                        <path d="M 150 ${y1} Q 300 ${y1 + 85} 450 ${y1}" fill="none" stroke="#b45309" stroke-width="1.2" opacity="0.7" />
+                        <path d="M 165 ${y2} Q 300 ${y2 + 75} 435 ${y2}" fill="none" stroke="#b45309" stroke-width="1.2" opacity="0.65" />
+                        ${bulbs}
+                    `;
+                } else {
+                    fairyLayer.innerHTML = '';
+                }
+            }
+
+            if (firefliesLayer) {
+                if (state.ambient.fireflies) {
+                    let spores = '';
+                    for (let i = 0; i < 18; i++) {
+                        const fx = 140 + ((i * 67) % 320);
+                        const fy = vessel.topY + 55 + ((i * 89) % 340);
+                        const delay = (i * 0.35).toFixed(2);
+                        const isUnderwater = state.waterLevel > 0 && fy > getWaterSurfaceY();
+                        const fill = isUnderwater ? 'rgba(224, 242, 254, 0.75)' : '#fef08a';
+                        const r = isUnderwater ? (1.6 + (i % 2)) : (2.2 + (i % 2));
+                        spores += `
+                            <circle cx="${fx}" cy="${fy}" r="${r}" fill="${fill}" class="firefly-particle" style="animation-delay:${delay}s" />
+                        `;
+                    }
+                    firefliesLayer.innerHTML = spores;
+                } else {
+                    firefliesLayer.innerHTML = '';
+                }
+            }
+        }
+
+        function toggleNightMode() {
+            state.ambient.isNight = !state.ambient.isNight;
+            SoundFX.playPop(380);
+            applyEnvironmentTheme();
+            if (state.activeTab === 'ambiance') renderSidebar();
+        }
+
+        function toggleFairyLights(val) {
+            state.ambient.fairyLights = Boolean(val);
+            SoundFX.playPop(520);
+            renderAmbientLayers();
+        }
+
+        function toggleFireflies(val) {
+            state.ambient.fireflies = Boolean(val);
+            SoundFX.playPop(560);
+            renderAmbientLayers();
+        }
+
+        function updateLightIntensity(val) {
+            state.ambient.lightIntensity = Number(val);
+            const label = document.getElementById('ambient-light-val');
+            if (label) label.textContent = `${state.ambient.lightIntensity}%`;
+            renderLampAndTerrain();
+            evaluateEcosystem();
+        }
+
+        function triggerWatering() {
+            SoundFX.playMist();
+            state.ambient.mistBoost = Math.min(20, state.ambient.mistBoost + 8);
+            evaluateEcosystem();
+
+            const mistLayer = document.getElementById('mist-layer');
+            const vessel = VESSELS[state.vesselId];
+            if (!mistLayer) return;
+
+            let drops = '';
+            for (let i = 0; i < 28; i++) {
+                const mx = 155 + Math.random() * 290;
+                const my = vessel.topY + 15 + Math.random() * 40;
+                const delay = (Math.random() * 0.45).toFixed(2);
+                drops += `<line x1="${mx}" y1="${my}" x2="${mx - 3}" y2="${my + 11}" stroke="rgba(186, 230, 253, 0.75)" stroke-width="1.8" stroke-linecap="round" class="mist-particle" style="animation-delay:${delay}s" />`;
+            }
+            mistLayer.innerHTML = drops;
+            setTimeout(() => {
+                if (mistLayer) mistLayer.innerHTML = '';
+            }, 2200);
+        }
+
+        function toggleSound() {
+            SoundFX.enabled = !SoundFX.enabled;
+            const icon = document.getElementById('icon-sound');
+            if (icon) {
+                icon.className = SoundFX.enabled ? 'ph-fill ph-speaker-high text-base' : 'ph-fill ph-speaker-slash text-base text-rose-500';
+            }
+            if (SoundFX.enabled) SoundFX.playPop(480);
+        }
+
+        function renderPlacedItems() {
+            const backLayer = document.getElementById('items-back-layer');
+            const frontLayer = document.getElementById('items-front-layer');
+            const overlay = document.getElementById('selection-overlay');
+            if (!backLayer || !frontLayer || !overlay) return;
+
+            let backHtml = '';
+            let frontHtml = '';
+            let selectedItem = null;
+
+            state.items.forEach(item => {
+                const cat = ITEM_CATALOG.find(c => c.id === item.type);
+                if (!cat) return;
+                const isSelected = item.uid === state.selectedItemId;
+                if (isSelected) selectedItem = { item, cat };
+
+                const scaleX = (item.flipped ? -1 : 1) * item.scale;
+                const scaleY = item.scale;
+                const outlineClass = isSelected ? 'item-selected-outline' : 'item-hover-outline';
+
+                const gMarkup = `
+                    <g data-uid="${item.uid}"
+                       transform="translate(${item.x.toFixed(1)}, ${item.y.toFixed(1)}) rotate(${item.rotation || 0}) scale(${scaleX.toFixed(2)}, ${scaleY.toFixed(2)})"
+                       onpointerdown="startItemDrag(event, ${item.uid})"
+                       class="cursor-grab active:cursor-grabbing ${outlineClass}">
+                        ${cat.svg}
+                    </g>
+                `;
+
+                if (item.layer === 'back') backHtml += gMarkup;
+                else frontHtml += gMarkup;
+            });
+
+            backLayer.innerHTML = backHtml;
+            frontLayer.innerHTML = frontHtml;
+
+            const inspector = document.getElementById('item-inspector');
+            if (selectedItem) {
+                const { item, cat } = selectedItem;
+                overlay.innerHTML = `
+                    <g transform="translate(${item.x.toFixed(1)}, ${item.y.toFixed(1)})">
+                        <circle cx="0" cy="-35" r="${Math.round(48 * item.scale)}" fill="none" stroke="rgba(245, 158, 11, 0.75)" stroke-width="1.5" stroke-dasharray="5 4" />
+                        <circle cx="0" cy="0" r="4" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+                    </g>
+                `;
+                if (inspector) {
+                    inspector.classList.remove('hidden');
+                    document.getElementById('inspector-name').textContent = cat.name;
+                    document.getElementById('inspector-scale').textContent = `${Math.round(item.scale * 100)}%`;
+                }
+            } else {
+                overlay.innerHTML = '';
+                if (inspector) inspector.classList.add('hidden');
+            }
+
+            renderInventoryList();
+        }
+
+        function renderInventoryList() {
+            const listEl = document.getElementById('placed-items-list');
+            const badgeEl = document.getElementById('item-count-badge');
+            if (!listEl || !badgeEl) return;
+
+            badgeEl.textContent = String(state.items.length);
+            if (state.items.length === 0) {
+                listEl.innerHTML = `<p class="text-botanical-400 italic py-4 text-center">No flora or hardscape placed yet. Click items in the left catalog to add them.</p>`;
+                return;
+            }
+
+            listEl.innerHTML = [...state.items].reverse().map(item => {
+                const cat = ITEM_CATALOG.find(c => c.id === item.type);
+                const isSel = item.uid === state.selectedItemId;
+                return `
+                    <div onclick="selectPlacedItem(${item.uid})" class="flex items-center justify-between px-2.5 py-1.5 rounded-xl cursor-pointer transition ${isSel ? 'bg-amber-50 border border-amber-300 text-botanical-900 font-semibold' : 'hover:bg-botanical-50 text-botanical-700 border border-transparent'}">
+                        <span class="truncate">${cat ? cat.name : item.type}</span>
+                        <span class="text-[10px] uppercase px-1.5 py-0.5 rounded bg-botanical-100 text-botanical-600">${item.layer}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectPlacedItem(uid) {
+            state.selectedItemId = uid;
+            SoundFX.playPop(450);
+            renderPlacedItems();
+        }
+
+        function addItemToTerrarium(typeId) {
+            const cat = ITEM_CATALOG.find(c => c.id === typeId);
+            if (!cat) return;
+            const topY = getTopSubstrateY();
+            const newItem = {
+                uid: ++nextItemUid,
+                type: typeId,
+                x: 260 + (Math.random() - 0.5) * 80,
+                y: topY - 12 - Math.random() * 25,
+                scale: cat.defaultScale || 1.0,
+                rotation: 0,
+                flipped: false,
+                layer: 'front'
+            };
+            state.items.push(newItem);
+            state.selectedItemId = newItem.uid;
+            SoundFX.playPop(500);
+            renderPlacedItems();
+            evaluateEcosystem();
+        }
+
+        function transformSelected(action, delta = 0) {
+            const item = state.items.find(i => i.uid === state.selectedItemId);
+            if (!item) return;
+
+            if (action === 'scale') {
+                item.scale = Math.max(0.4, Math.min(2.4, Number((item.scale + delta).toFixed(2))));
+            } else if (action === 'rotate') {
+                item.rotation = ((item.rotation || 0) + delta) % 360;
+            } else if (action === 'flip') {
+                item.flipped = !item.flipped;
+            } else if (action === 'layer') {
+                item.layer = delta > 0 ? 'front' : 'back';
+            }
+            SoundFX.playPop(470);
+            renderPlacedItems();
+        }
+
+        function duplicateSelected() {
+            const item = state.items.find(i => i.uid === state.selectedItemId);
+            if (!item) return;
+            const copy = {
+                ...item,
+                uid: ++nextItemUid,
+                x: Math.min(460, item.x + 24),
+                y: item.y + 6
+            };
+            state.items.push(copy);
+            state.selectedItemId = copy.uid;
+            SoundFX.playPop(540);
+            renderPlacedItems();
+            evaluateEcosystem();
+        }
+
+        function deleteSelected() {
+            if (!state.selectedItemId) return;
+            state.items = state.items.filter(i => i.uid !== state.selectedItemId);
+            state.selectedItemId = null;
+            SoundFX.playPop(280);
+            renderPlacedItems();
+            evaluateEcosystem();
+        }
+
+        function clearAllItems() {
+            state.items = [];
+            state.fauna = [];
+            state.selectedItemId = null;
+            SoundFX.playPop(250);
+            renderPlacedItems();
+            renderSidebar();
+            evaluateEcosystem();
+        }
+
+        function getSvgCoords(evt) {
+            const svg = document.getElementById('terrarium-svg');
+            const pt = svg.createSVGPoint();
+            pt.x = evt.clientX;
+            pt.y = evt.clientY;
+            const ctm = svg.getScreenCTM();
+            if (!ctm) return { x: 300, y: 300 };
+            return pt.matrixTransform(ctm.inverse());
+        }
+
+        function startItemDrag(evt, uid) {
+            evt.stopPropagation();
+            const item = state.items.find(i => i.uid === uid);
+            if (!item) return;
+            state.selectedItemId = uid;
+            const coords = getSvgCoords(evt);
+            state.drag.active = true;
+            state.drag.itemId = uid;
+            state.drag.offsetX = coords.x - item.x;
+            state.drag.offsetY = coords.y - item.y;
+            renderPlacedItems();
+        }
+
+        window.addEventListener('pointermove', (evt) => {
+            if (!state.drag.active || !state.drag.itemId) return;
+            const item = state.items.find(i => i.uid === state.drag.itemId);
+            if (!item) return;
+            const vessel = VESSELS[state.vesselId];
+            const coords = getSvgCoords(evt);
+            item.x = Math.max(vessel.minX + 15, Math.min(vessel.maxX - 15, coords.x - state.drag.offsetX));
+            item.y = Math.max(vessel.topY + 25, Math.min(vessel.baseY + 10, coords.y - state.drag.offsetY));
+            renderPlacedItems();
+        });
+
+        window.addEventListener('pointerup', () => {
+            if (state.drag.active) {
+                state.drag.active = false;
+                state.drag.itemId = null;
+            }
+        });
+
+        window.addEventListener('keydown', (evt) => {
+            if ((evt.key === 'Delete' || evt.key === 'Backspace') && state.selectedItemId) {
+                if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+                deleteSelected();
+            }
+        });
+
+        function evaluateEcosystem() {
+            const vessel = VESSELS[state.vesselId];
+            let moistureSupply = 25 + vessel.humidityRetention + Math.round(state.waterLevel * 0.65) + state.ambient.mistBoost;
+            let hasPebbles = false;
+            let hasCharcoal = false;
+
+            state.substrates.forEach(s => {
+                const cat = SUBSTRATE_CATALOG[s.type];
+                if (cat) {
+                    moistureSupply += Math.round(cat.moistureBonus * (Number(s.thickness) / 30));
+                }
+                if (s.type === 'pebbles') hasPebbles = true;
+                if (s.type === 'charcoal') hasCharcoal = true;
+            });
+
+            moistureSupply = Math.max(15, Math.min(99, moistureSupply));
+            const lightLevel = state.ambient.lightIntensity;
+
+            let score = 96;
+            if (!hasPebbles && state.waterLevel === 0) score -= 8;
+            if (!hasCharcoal) score -= 5;
+
+            const aquaticFauna = state.fauna.filter(f => f.type === 'tetra' || f.type === 'koi').length;
+            if (aquaticFauna > 0 && state.waterLevel < 15) {
+                score -= 22;
+            }
+
+            score = Math.max(45, Math.min(100, Math.round(score)));
+
+            document.getElementById('harmony-score').textContent = `${score}%`;
+            document.getElementById('harmony-bar').style.width = `${score}%`;
+            document.getElementById('moisture-bar').style.width = `${moistureSupply}%`;
+            document.getElementById('moisture-label').textContent = `${moistureSupply}%`;
+            document.getElementById('light-bar').style.width = `${lightLevel}%`;
+            document.getElementById('light-label').textContent = `${lightLevel}%`;
+
+            // Update Fauna telemetry pill
+            const faunaPill = document.getElementById('fauna-count-pill');
+            const faunaText = document.getElementById('fauna-status-text');
+            if (faunaPill) faunaPill.textContent = `${state.fauna.length} Active`;
+            if (faunaText) {
+                faunaText.textContent = state.fauna.length > 0
+                    ? `${state.fauna.length} living creatures actively exploring your biome. Click "Feed Fauna" in the top bar to watch fish school!`
+                    : `Add schooling Neon Tetras, Red Cherry Shrimp, Tree Frogs, or Butterflies from the Fauna tab.`;
+            }
+
+            const biomeEl = document.getElementById('biome-type');
+            if (state.waterLevel >= 38) biomeEl.textContent = 'Nature Aquascape';
+            else if (state.waterLevel > 0) biomeEl.textContent = 'Waterfall Paludarium';
+            else biomeEl.textContent = 'Wabi-Kusa Canyon';
+        }
+
+        function applyEnvironmentTheme() {
+            const stage = document.getElementById('stage-container');
+            const icon = document.getElementById('icon-daynight');
+            const label = document.getElementById('label-daynight');
+            const btnNight = document.getElementById('btn-night');
+            const interiorTint = document.getElementById('interior-backdrop-tint');
+            const haloPool = document.getElementById('table-halo-pool');
+
+            if (state.ambient.isNight) {
+                stage.className = 'flex-1 relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 order-1 lg:order-2 h-[60vh] lg:h-full bg-gradient-to-b from-[#080b09] via-[#101612] to-[#070908]';
+                icon.className = 'ph-fill ph-lightbulb-filament text-base text-amber-300';
+                label.textContent = 'Halo Darkroom';
+                btnNight.className = 'flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-indigo-950 hover:bg-indigo-900 text-indigo-100 border border-indigo-700 text-xs font-semibold transition active:scale-95 shadow-sm';
+                if (interiorTint) interiorTint.setAttribute('opacity', '0.68');
+                if (haloPool) haloPool.style.opacity = '1';
+            } else {
+                stage.className = 'flex-1 relative flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 order-1 lg:order-2 h-[60vh] lg:h-full bg-gradient-to-b from-[#e6ede4] via-[#d8e4d4] to-[#c3d5be]';
+                icon.className = 'ph-fill ph-sun text-base text-amber-500';
+                label.textContent = 'Bright Studio';
+                btnNight.className = 'flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-semibold transition active:scale-95 shadow-sm';
+                if (interiorTint) interiorTint.setAttribute('opacity', '0.18');
+                if (haloPool) haloPool.style.opacity = '0.25';
+            }
+            renderLampAndTerrain();
+        }
+
+        function loadPreset(presetName) {
+            state.selectedItemId = null;
+            state.fauna = [];
+            state.foodParticles = [];
+
+            const selectEl = document.getElementById('preset-select');
+            if (selectEl && selectEl.value !== presetName) {
+                selectEl.value = presetName;
+            }
+
+            if (presetName === 'canyon_bridge' || presetName === 'rainforest') {
+                // Reference Photo 1: Gooseneck Halo Spotlight over Mossy Canyon, Rope Bridge, Bonsai & Red-Hat Traveler
+                state.vesselId = 'halo_jar';
+                state.terrainStyle = 'canyon';
+                state.waterLevel = 0;
+                state.ambient.isNight = true;
+                state.ambient.lightIntensity = 94;
+                state.ambient.fairyLights = false;
+                state.ambient.fireflies = true;
+                state.substrates = [
+                    { id: 's1', type: 'pebbles', thickness: 22, color: '#64748b', wave: 4 },
+                    { id: 's2', type: 'charcoal', thickness: 18, color: '#090d16', wave: 3 },
+                    { id: 's3', type: 'soil', thickness: 34, color: '#261811', wave: 6 },
+                    { id: 's4', type: 'moss', thickness: 32, color: '#65a30d', wave: 16 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 215, y: topY - 12, scale: 1.25, rotation: -6, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 395, y: topY - 18, scale: 1.35, rotation: 8, flipped: true, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'bonsai_canopy', x: 255, y: topY - 72, scale: 1.38, rotation: 4, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'rope_bridge', x: 305, y: topY - 68, scale: 1.22, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'wanderer', x: 335, y: topY - 82, scale: 0.92, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'blossom_sprig', x: 205, y: topY - 2, scale: 1.05, rotation: 10, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'blossom_sprig', x: 375, y: topY - 4, scale: 1.0, rotation: -12, flipped: true, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'mosspuff', x: 295, y: topY + 12, scale: 1.2, rotation: 0, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('butterfly', 2);
+                addFaunaGroup('frog', 1);
+                addFaunaGroup('ladybug', 1);
+            } else if (presetName === 'samurai_pagoda') {
+                // Reference Photo 2: Teardrop Cloche on Wood Base, Slate Staircase, Pagoda, Lush Tree & Pink Cryptocoryne
+                state.vesselId = 'teardrop_cloche';
+                state.terrainStyle = 'island';
+                state.waterLevel = 0;
+                state.ambient.isNight = false;
+                state.ambient.lightIntensity = 86;
+                state.ambient.fairyLights = false;
+                state.ambient.fireflies = true;
+                state.substrates = [
+                    { id: 's1', type: 'charcoal', thickness: 24, color: '#1c1917', wave: 4 },
+                    { id: 's2', type: 'soil', thickness: 48, color: '#261811', wave: 8 },
+                    { id: 's3', type: 'moss', thickness: 28, color: '#4d7c0f', wave: 12 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'bonsai_canopy', x: 335, y: topY - 38, scale: 1.45, rotation: -4, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'pagoda', x: 215, y: topY - 58, scale: 0.95, rotation: 0, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 390, y: topY - 4, scale: 1.05, rotation: 6, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'stone_steps', x: 290, y: topY + 10, scale: 1.25, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'wanderer', x: 302, y: topY - 42, scale: 0.95, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'red_crypto', x: 215, y: topY + 8, scale: 1.15, rotation: -12, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('butterfly', 2);
+                addFaunaGroup('frog', 1);
+            } else if (presetName === 'turquoise_lagoon' || presetName === 'desert') {
+                // Reference Photo 3: Spherical Bowl, Turquoise Lagoon Water, White Waterfall Chute, Pagoda & Red-Cloak Samurai
+                state.vesselId = 'lagoon_bowl';
+                state.terrainStyle = 'island';
+                state.waterLevel = 26;
+                state.waterTint = 'turquoise';
+                state.ambient.isNight = false;
+                state.ambient.lightIntensity = 82;
+                state.ambient.fairyLights = false;
+                state.ambient.fireflies = true;
+                state.substrates = [
+                    { id: 's1', type: 'sand', thickness: 32, color: '#e6ccb2', wave: 5 },
+                    { id: 's2', type: 'pebbles', thickness: 36, color: '#94a3b8', wave: 8 },
+                    { id: 's3', type: 'moss', thickness: 28, color: '#3f6212', wave: 12 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 255, y: topY - 45, scale: 1.25, rotation: -4, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 350, y: topY - 38, scale: 1.2, rotation: 12, flipped: true, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'pagoda', x: 210, y: topY - 58, scale: 1.1, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'waterfall_chute', x: 235, y: topY + 12, scale: 1.05, rotation: 10, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'wanderer', x: 330, y: topY - 46, scale: 1.15, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'mosspuff', x: 395, y: topY - 12, scale: 1.25, rotation: 0, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('koi', 3);
+                addFaunaGroup('shrimp', 3);
+                addFaunaGroup('frog', 1);
+            } else if (presetName === 'rimless_cube') {
+                // Reference Photo 4: Frameless Cube Tank, White Sand Valley Pass, Seiryu Peaks, Pillow Moss & Dwarf Tree
+                state.vesselId = 'rimless_cube';
+                state.terrainStyle = 'canyon';
+                state.waterLevel = 0;
+                state.ambient.isNight = false;
+                state.ambient.lightIntensity = 88;
+                state.ambient.fairyLights = false;
+                state.ambient.fireflies = false;
+                state.substrates = [
+                    { id: 's1', type: 'pebbles', thickness: 34, color: '#a8a29e', wave: 4 },
+                    { id: 's2', type: 'charcoal', thickness: 24, color: '#090d16', wave: 5 },
+                    { id: 's3', type: 'sand', thickness: 28, color: '#ffffff', wave: 10 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'bonsai_canopy', x: 265, y: topY - 110, scale: 1.15, rotation: 0, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 225, y: topY - 18, scale: 1.25, rotation: -12, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 315, y: topY - 35, scale: 1.35, rotation: 4, flipped: true, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'mosspuff', x: 185, y: topY - 48, scale: 1.2, rotation: -15, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'mosspuff', x: 395, y: topY - 22, scale: 1.3, rotation: 12, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('butterfly', 1);
+                addFaunaGroup('ladybug', 2);
+            } else if (presetName === 'blossom_paludarium' || presetName === 'enchanted') {
+                // Reference Photo 5: Grand Twin-Tier Paludarium with Pink Sakura Tree, Glowing Tea Houses, Waterfall & Aquarium
+                state.vesselId = 'grand_vivarium';
+                state.terrainStyle = 'left_cliff';
+                state.waterLevel = 32;
+                state.waterTint = 'emerald';
+                state.ambient.isNight = true;
+                state.ambient.lightIntensity = 90;
+                state.ambient.fairyLights = false;
+                state.ambient.fireflies = true;
+                state.substrates = [
+                    { id: 's1', type: 'sand', thickness: 26, color: '#f5ebe0', wave: 4 },
+                    { id: 's2', type: 'soil', thickness: 24, color: '#261811', wave: 6 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'cherry_blossom', x: 220, y: topY - 140, scale: 1.45, rotation: 4, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'waterfall_chute', x: 295, y: topY - 20, scale: 1.35, rotation: 0, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'tea_cottage', x: 425, y: topY - 115, scale: 1.15, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'tea_cottage', x: 155, y: topY - 75, scale: 0.95, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 420, y: topY - 15, scale: 1.3, rotation: 12, flipped: true, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'seiryu_crag', x: 185, y: topY - 15, scale: 1.25, rotation: -8, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('tetra', 7);
+                addFaunaGroup('shrimp', 3);
+                addFaunaGroup('frog', 1);
+                addFaunaGroup('butterfly', 2);
+            } else if (presetName === 'neon_aquascape') {
+                // Reference Photo 6: Lush Emerald Planted Aquascape teeming with Schooling Neon Tetras & Red Cryptocoryne
+                state.vesselId = 'rimless_cube';
+                state.terrainStyle = 'canyon';
+                state.waterLevel = 56;
+                state.waterTint = 'emerald';
+                state.ambient.isNight = false;
+                state.ambient.lightIntensity = 95;
+                state.ambient.fairyLights = false;
+                state.ambient.fireflies = true;
+                state.substrates = [
+                    { id: 's1', type: 'soil', thickness: 36, color: '#261811', wave: 8 },
+                    { id: 's2', type: 'moss', thickness: 26, color: '#4d7c0f', wave: 12 }
+                ];
+                const topY = getTopSubstrateY();
+                state.items = [
+                    { uid: ++nextItemUid, type: 'vallisneria', x: 165, y: topY - 25, scale: 1.65, rotation: 8, flipped: false, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'vallisneria', x: 435, y: topY - 25, scale: 1.55, rotation: -8, flipped: true, layer: 'back' },
+                    { uid: ++nextItemUid, type: 'driftwood', x: 225, y: topY + 2, scale: 1.25, rotation: -12, flipped: true, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'driftwood', x: 385, y: topY + 4, scale: 1.25, rotation: 8, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'red_crypto', x: 195, y: topY + 14, scale: 1.35, rotation: 0, flipped: false, layer: 'front' },
+                    { uid: ++nextItemUid, type: 'fern', x: 310, y: topY - 6, scale: 1.15, rotation: 0, flipped: false, layer: 'front' }
+                ];
+                addFaunaGroup('tetra', 16);
+                addFaunaGroup('shrimp', 5);
+            }
+
+            SoundFX.playChime();
+            applyEnvironmentTheme();
+            renderSidebar();
+            renderVesselAndSubstrates();
+            renderAmbientLayers();
+            renderPlacedItems();
+            evaluateEcosystem();
+        }
+
+        function exportSnapshot() {
+            state.selectedItemId = null;
+            renderPlacedItems();
+            SoundFX.playChime();
+
+            const svgNode = document.getElementById('terrarium-svg');
+            const serializer = new XMLSerializer();
+            let svgString = serializer.serializeToString(svgNode);
+            if (!svgString.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)) {
+                svgString = svgString.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+            }
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 900;
+            canvas.height = 975;
+            const ctx = canvas.getContext('2d');
+
+            const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            if (state.ambient.isNight) {
+                grad.addColorStop(0, '#080b09');
+                grad.addColorStop(1, '#121814');
+            } else {
+                grad.addColorStop(0, '#eef3ec');
+                grad.addColorStop(1, '#cfe0c8');
+            }
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const img = new Image();
+            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(svgBlob);
+
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                URL.revokeObjectURL(url);
+
+                ctx.fillStyle = state.ambient.isNight ? 'rgba(255,255,255,0.75)' : 'rgba(39,56,36,0.75)';
+                ctx.font = 'bold 22px Fraunces, serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(`Verdant Glass Studio • ${VESSELS[state.vesselId].name}`, canvas.width / 2, canvas.height - 28);
+
+                const pngUrl = canvas.toDataURL('image/png');
+                document.getElementById('snapshot-img').src = pngUrl;
+                document.getElementById('snapshot-download').href = pngUrl;
+                document.getElementById('snapshot-stats').textContent = `${VESSELS[state.vesselId].name} • ${state.fauna.length} Live Fauna • ${document.getElementById('harmony-score').textContent} Balance`;
+                document.getElementById('snapshot-modal').classList.remove('hidden');
+            };
+            img.src = url;
+        }
+
+        function closeSnapshotModal() {
+            document.getElementById('snapshot-modal').classList.add('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const svg = document.getElementById('terrarium-svg');
+            if (svg) {
+                svg.addEventListener('pointerdown', (e) => {
+                    if (e.target === svg || e.target.id === 'vessel-back-path' || e.target.id === 'interior-backdrop-tint') {
+                        state.selectedItemId = null;
+                        renderPlacedItems();
+                    }
+                });
+            }
+            loadPreset('canyon_bridge');
+            startAnimationLoop();
+        });
+    </script>
+</body>
+</html>
